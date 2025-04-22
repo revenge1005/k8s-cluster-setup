@@ -33,8 +33,8 @@ sudo docker run hello-world
 ```
 
 ### D) cri-docker install.
-# -> https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
-# -> https://github.com/Mirantis/cri-dockerd
+- https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker
+- https://github.com/Mirantis/cri-dockerd
 
 ```bash
 {
@@ -50,7 +50,7 @@ sudo docker run hello-world
 
 ### A) Installing kubeadm, kubelet and kubectl
 
-https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
+- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
 
 ```bash
 # Update the apt package index and install packages needed to use the Kubernetes apt repository:
