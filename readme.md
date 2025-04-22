@@ -18,8 +18,8 @@ cat <<EOF >>/etc/hosts
 # Control Node.
 192.168.219.100  k8s-master  
 # Ansible Managed Nodes.
-192.168.219.110  k8s-node01  
-192.168.219.120  k8s-node02
+192.168.219.110  k8s-worker01  
+192.168.219.120  k8s-worker02
 EOF
 
 # Swap disabled. 
