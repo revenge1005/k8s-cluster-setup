@@ -13,4 +13,4 @@
 
 ## 03. Node Info
 
-![node_info.drawio]()
+![node_info.drawio](https://github.com/revenge1005/k8s-cluster-setup/blob/main/node_info.drawio.png)
