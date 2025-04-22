@@ -6,10 +6,10 @@
 - Kubernetes 버전 : 1.32
 - K8S 설치 공식 문서 : https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
-## 02. Container Runtimes
+## 02. Kubernetes Cluster Setup Guide
 
-- [01. Docker Engine]()
-- [02. containerd]()
+- [1. Installing Kubernetes with Docker Engine Runtime]()
+- [2. Installing Kubernetes with containerd Runtime]()
 
 ## 03. Node Info
 
