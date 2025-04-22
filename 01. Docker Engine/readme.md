@@ -37,12 +37,10 @@ sudo docker run hello-world
 - https://github.com/Mirantis/cri-dockerd
 
 ```bash
-{
-	wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.17/cri-dockerd_0.3.17.3-0.debian-bullseye_amd64.deb
-	dpkg -i cri-dockerd_0.3.17.3-0.debian-bullseye_amd64.deb
-	systemctl status cri-docker
-	ls -l  /var/run/cri-dockerd.sock
-}
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.17/cri-dockerd_0.3.17.3-0.debian-bullseye_amd64.deb
+dpkg -i cri-dockerd_0.3.17.3-0.debian-bullseye_amd64.deb
+systemctl status cri-docker
+ls -l  /var/run/cri-dockerd.sock
 ```
 
 
