@@ -6,9 +6,9 @@ Kubernetes Cluster Setup Guide.
 
 ## 01. 사전 준비
 
-- VMware Workstation : 가상 머신 생성, Ubuntu 24.04 설치
-- Kubernetes 버전 : 1.32
-- K8S 설치 공식 문서 : https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+- **VMware Workstation** : Create virtual machines with Ubuntu 24.04.
+- **Kubernetes Version** : 1.32
+- **Official Documentation**: [Kubernetes Setup Guide](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
 ### A) k8s-master, k8s-worker1, k8s-worker2의 system 구성 설정 - All Node
 
@@ -23,16 +23,14 @@ cat <<EOF >>/etc/hosts
 EOF
 
 # Swap disabled. 
-{
-	swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
-	swapon -s
-}
+swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
+swapon -s
 ```
 
 ### B) IPv4를 포워딩하여 iptables가 bridge된 traffic을 보게 하기 - All Node
 
 ```bash
-# Load "br_netfilter" module
+# Load required kernel modules for container networking
 {
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
@@ -43,7 +41,7 @@ EOF
 	modprobe br_netfilter
 }
 
-# Modifying "bridge traffic" kernel parameters
+# Configure sysctl for bridge traffic and IPv4 forwarding
 {
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables  = 1
@@ -57,5 +55,6 @@ sysctl --system
 ## 02. Choosing a container runtime.
 
 - [1. Installing Kubernetes with Docker Engine Runtime](https://github.com/revenge1005/k8s-cluster-setup/blob/main/01.%20Docker%20Engine/readme.md)
-
+  *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
+  
 - [2. Installing Kubernetes with containerd Runtime](https://github.com/revenge1005/k8s-cluster-setup/blob/main/02.%20containerd/readme.md)
