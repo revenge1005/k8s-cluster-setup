@@ -4,15 +4,16 @@ Kubernetes Cluster Setup Guide.
 
 ![node_info.drawio](https://github.com/revenge1005/k8s-cluster-setup/blob/main/node_info.drawio.png)
 
-## 01. 사전 준비 - All Node
+## 01. 사전 준비
 
 - **VMware Workstation** : Create virtual machines with Ubuntu 24.04.
 - **Kubernetes Version** : 1.32
 - **Official Documentation**: [Kubernetes Setup Guide](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
-### A) k8s-master, k8s-worker1, k8s-worker2의 system 구성 설정
+### A) System Configuration for All Nodes (k8s-master, k8s-node01, k8s-node02)
 
 ```bash
+# Add Kubernetes nodes to /etc/hosts for name resolution
 cat <<EOF >>/etc/hosts
 
 # Control Node.
@@ -22,12 +23,12 @@ cat <<EOF >>/etc/hosts
 192.168.219.120  k8s-worker02
 EOF
 
-# Swap disabled. 
+# Disable swap to meet Kubernetes requirements
 swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
 swapon -s
 ```
 
-### B) IPv4를 포워딩하여 iptables가 bridge된 traffic을 보게 하기
+### B) Enable IPv4 Forwarding and Bridge Traffic - All Nodes
 
 ```bash
 # Load required kernel modules for container networking
