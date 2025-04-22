@@ -54,7 +54,7 @@ sysctl --system
 }
 ```
 
-## 04. Kubernetes Cluster Setup Guide
+## 04. Choosing a container runtime.
 
 - [1. Installing Kubernetes with Docker Engine Runtime]()
 - [2. Installing Kubernetes with containerd Runtime]()
