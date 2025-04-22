@@ -1,10 +1,10 @@
 # k8s Cluster Setup
 
-## 01. Node Info
+Kubernetes Cluster Setup Guide.
 
 ![node_info.drawio](https://github.com/revenge1005/k8s-cluster-setup/blob/main/node_info.drawio.png)
 
-## 02. 사전 준비
+## 01. 사전 준비
 
 - VMware Workstation : 가상 머신 생성, Ubuntu 24.04 설치
 - Kubernetes 버전 : 1.32
@@ -54,7 +54,7 @@ sysctl --system
 }
 ```
 
-## 03. Choosing a container runtime.
+## 02. Choosing a container runtime.
 
 - [1. Installing Kubernetes with Docker Engine Runtime](https://github.com/revenge1005/k8s-cluster-setup/blob/main/01.%20Docker%20Engine/readme.md)
 - [2. Installing Kubernetes with containerd Runtime](https://github.com/revenge1005/k8s-cluster-setup/blob/main/02.%20containerd/readme.md)
