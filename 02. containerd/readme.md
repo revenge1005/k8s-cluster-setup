@@ -53,9 +53,7 @@ sudo systemctl enable --now kubelet
 
 ```bash
 # control-plane (master) component configuration
-kubeadm init --control-plane-endpoint=10.0.0.25 \
-    --apiserver-advertise-address=10.0.0.30 \ 
-    --pod-network-cidr=192.168.0.0/16 \
+kubeadm init --pod-network-cidr=192.168.0.0/16 \
     --cri-socket=unix:///run/containerd/containerd.sock
 
 # To allow Kubectl to execute a command, you must act on the results of the execution of the kubadminit command.
