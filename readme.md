@@ -60,3 +60,10 @@ sysctl --system
   *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
 - [2. Installing Kubernetes with containerd Runtime](https://github.com/revenge1005/k8s-cluster-setup/blob/main/02.%20containerd/readme.md)
+
+
+## 03. Dynamic Volume Provisioning
+
+- [1. Dynamic Volume Provisioning (NFS)]()
+
+- [2. Dynamic Volume Provisioning (Ceph)]()
