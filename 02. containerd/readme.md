@@ -16,6 +16,8 @@ SystemdCgroup = true
 systemctl restart containerd.service
 ```
 
+<BR>
+
 ## 02. Installing kubeadm : ALL Node
 
 ### A) Installing kubeadm, kubelet and kubectl
@@ -47,6 +49,8 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl enable --now kubelet
 ```
 
+<BR>
+
 ## 03. Creating a cluster with kubeadm
 
 ### A) Initializing your control-plane node : k8s-master
@@ -77,6 +81,8 @@ kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/we
 watch -n 3 kubectl get nodes
 ```
 
+<BR>
+
 ## 04. Joining nodes - worker01, worker02
 
 ```bash
@@ -84,6 +90,8 @@ kubeadm join 192.168.219.10:6443 --token 2whv...bbib \
   --discovery-token-ca-cert-hash sha256:712538d8a5a...6a5078570b57 \
   --cri-socket=unix:///run/containerd/containerd.sock
 ```
+
+<BR>
 
 ## 05. Default Configuration
 
@@ -108,4 +116,55 @@ mv etcd etcdctl etcdutl /usr/local/bin
 
 
 etcd --version
+```
+
+<BR>
+
+## 6. Final verification
+
+```bash
+$ kubectl get nodes -o wide
+NAME            STATUS   ROLES           AGE     VERSION   INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+test-ubuntu-1   Ready    control-plane   2m14s   v1.32.4   192.168.219.10   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
+test-ubuntu-2   Ready    <none>          53s     v1.32.4   192.168.219.11   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
+test-ubuntu-3   Ready    <none>          44s     v1.32.4   192.168.219.12   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
+```
+
+```bash
+$ cat <<EOF > test_delpoy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+EOF
+
+$ kubectl apply -f test_delpoy.yml
+
+$ kubectl get all -o wide
+NAME                              READY   STATUS    RESTARTS   AGE   IP          NODE            NOMINATED NODE   READINESS GATES
+pod/web-deploy-585ff9c9b9-5dlwq   1/1     Running   0          13s   10.40.0.1   k8s-worker02    <none>           <none>
+pod/web-deploy-585ff9c9b9-lfxh7   1/1     Running   0          13s   10.38.0.1   k8s-worker03    <none>           <none>
+pod/web-deploy-585ff9c9b9-zxb68   1/1     Running   0          13s   10.38.0.2   k8s-worker03    <none>           <none>
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   13m   <none>
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES       SELECTOR
+deployment.apps/web-deploy   3/3     3            3           13s   nginx        nginx:1.16   app=web
+
+NAME                                    DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES       SELECTOR
+replicaset.apps/web-deploy-585ff9c9b9   3         3         3       13s   nginx        nginx:1.16   app=web,pod-template-hash=585ff9c9b9
 ```
