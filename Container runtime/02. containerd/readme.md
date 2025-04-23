@@ -125,9 +125,9 @@ etcd --version
 ```bash
 $ kubectl get nodes -o wide
 NAME            STATUS   ROLES           AGE     VERSION   INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
-test-ubuntu-1   Ready    control-plane   2m14s   v1.32.4   192.168.219.10   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
-test-ubuntu-2   Ready    <none>          53s     v1.32.4   192.168.219.11   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
-test-ubuntu-3   Ready    <none>          44s     v1.32.4   192.168.219.12   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
+k8s-master      Ready    control-plane   2m14s   v1.32.4   192.168.219.10   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
+k8s-worker01    Ready    <none>          53s     v1.32.4   192.168.219.11   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
+k8s-worker02    Ready    <none>          44s     v1.32.4   192.168.219.12   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
 ```
 
 ```bash
@@ -155,9 +155,9 @@ $ kubectl apply -f test_delpoy.yml
 
 $ kubectl get all -o wide
 NAME                              READY   STATUS    RESTARTS   AGE   IP          NODE            NOMINATED NODE   READINESS GATES
-pod/web-deploy-585ff9c9b9-5dlwq   1/1     Running   0          13s   10.40.0.1   k8s-worker02    <none>           <none>
-pod/web-deploy-585ff9c9b9-lfxh7   1/1     Running   0          13s   10.38.0.1   k8s-worker03    <none>           <none>
-pod/web-deploy-585ff9c9b9-zxb68   1/1     Running   0          13s   10.38.0.2   k8s-worker03    <none>           <none>
+pod/web-deploy-585ff9c9b9-5dlwq   1/1     Running   0          13s   10.40.0.1   k8s-worker01    <none>           <none>
+pod/web-deploy-585ff9c9b9-lfxh7   1/1     Running   0          13s   10.38.0.1   k8s-worker02    <none>           <none>
+pod/web-deploy-585ff9c9b9-zxb68   1/1     Running   0          13s   10.38.0.2   k8s-worker02    <none>           <none>
 
 NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
 service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   13m   <none>
