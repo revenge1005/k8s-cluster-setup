@@ -1,7 +1,5 @@
 ## 01. Installing a container runtime : All Nodes
 
-### A) 
-
 ```bash
 apt -y install containerd
 mkdir /etc/containerd
@@ -14,6 +12,8 @@ sandbox_image = "registry.k8s.io/pause:3.9"
 
 # line 137 : change
 SystemdCgroup = true
+
+systemctl restart containerd.service
 ```
 
 ## 02. Installing kubeadm : ALL Node
