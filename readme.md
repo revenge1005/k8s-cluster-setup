@@ -62,7 +62,7 @@ sysctl --system
 - [2. Installing Kubernetes with containerd Runtime](https://github.com/revenge1005/k8s-cluster-setup/blob/main/02.%20containerd/readme.md)
 
 
-## 03. Dynamic Volume Provisioning
+## 03. (Optional) Dynamic Volume Provisioning
 
 - [1. Dynamic Volume Provisioning (NFS)]()
 
