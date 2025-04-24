@@ -67,7 +67,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 
 # Save the results of the execution of the kubeadm init command (kubeadm join command) separately.
-kubeadm join 192.168.219.10:6443 --token 2whvdj...qbbib \
+kubeadm join 192.168.219.100:6443 --token 2whvdj...qbbib \
   --discovery-token-ca-cert-hash sha256:7125...78570b57 \
   --cri-socket=unix:///run/containerd/containerd.sock
 ```
@@ -86,7 +86,7 @@ watch -n 3 kubectl get nodes
 ## 04. Joining nodes - worker01, worker02
 
 ```bash
-kubeadm join 192.168.219.10:6443 --token 2whv...bbib \
+kubeadm join 192.168.219.100:6443 --token 2whv...bbib \
   --discovery-token-ca-cert-hash sha256:712538d8a5a...6a5078570b57 \
   --cri-socket=unix:///run/containerd/containerd.sock
 ```
