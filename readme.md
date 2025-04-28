@@ -66,4 +66,4 @@ sysctl --system
 
 - [1. Dynamic Volume Provisioning (NFS)](https://github.com/revenge1005/k8s-cluster-setup/blob/main/Dynamic%20Volume%20Provisioning/NFS/readme.md)
 
-- [2. Dynamic Volume Provisioning (Ceph)]()
+- [2. Dynamic Volume Provisioning (Ceph-csi)]()
