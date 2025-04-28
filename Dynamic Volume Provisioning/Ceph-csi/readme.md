@@ -314,8 +314,32 @@ EOF
     # The -f flag applies the configuration from ceph-csi.vo
     # Note: Installation may take some time depending on the test environment
     helm install --namespace "ceph-csi-cephfs" "ceph-csi-cephfs" ceph-csi/ceph-csi-cephfs -f ceph-csi.vo
-    kubectl get all -n ceph-csi-cephfs
+    watch kubectl get all -n ceph-csi-cephfs
 }
+```
+
+```bash
+$ kubectl get all -n ceph-csi-cephfs                                                                                                
+
+NAME                                              READY   STATUS    RESTARTS   AGE
+pod/ceph-csi-cephfs-nodeplugin-cdqkj              3/3     Running   0          13m
+pod/ceph-csi-cephfs-nodeplugin-xtfv2              3/3     Running   0          13m
+pod/ceph-csi-cephfs-provisioner-bff7587bd-72zwk   5/5     Running   0          13m
+pod/ceph-csi-cephfs-provisioner-bff7587bd-ckqmn   5/5     Running   0          13m
+pod/ceph-csi-cephfs-provisioner-bff7587bd-m2kqc   0/5     Pending   0          13m
+
+NAME                                               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/ceph-csi-cephfs-nodeplugin-http-metrics    ClusterIP   10.103.142.135   <none>        8080/TCP   13m
+service/ceph-csi-cephfs-provisioner-http-metrics   ClusterIP   10.105.138.116   <none>        8080/TCP   13m
+
+NAME                                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/ceph-csi-cephfs-nodeplugin   2         2         2       2            2           <none>          13m
+
+NAME                                          READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/ceph-csi-cephfs-provisioner   2/3     3            2           13m
+
+NAME                                                    DESIRED   CURRENT   READY   AGE
+replicaset.apps/ceph-csi-cephfs-provisioner-bff7587bd   3         3         2       13m
 ```
 
 ```bash
@@ -333,6 +357,8 @@ stringData:
   adminID: admin
   adminKey: AQD0Gw9ooEluMhAAntscL1ae3t62BYikI7+0pQ==
 EOF
+
+kubectl apply -f csi-fs-secret.yaml 
 ```
 
 ### D) StorageClass Configuration and Deployment 
@@ -348,7 +374,7 @@ metadata:
 allowVolumeExpansion: true
 provisioner: cephfs.csi.ceph.com
 parameters:
-   clusterID: 3adf5d85-7d69-455d-82cf-f799e63981e4
+   clusterID: c7e23d20-36e7-462d-b2b2-dbadc96b52e7
    fsName: kubernetes
    csi.storage.k8s.io/controller-expand-secret-name: csi-fs-secret
    csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
