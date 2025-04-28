@@ -35,10 +35,8 @@ apt -y install nfs-kernel-server
 
 
 cat <<EOF >> /etc/exports
-
-# for example, set [/home/nfsshare] as NFS share
-/home/nfsshare 10.0.0.0/24(rw,no_root_squash)
-EOF 
+/home/nfsshare 192.168.219.0/24(rw,no_root_squash)
+EOF
 
 
 mkdir /home/nfsshare
