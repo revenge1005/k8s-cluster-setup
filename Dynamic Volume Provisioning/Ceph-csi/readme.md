@@ -27,6 +27,7 @@ or
 
 ```bash
 # Generate SSH key-pair on [Monitor Daemon] Node (call it Admin Node on here) and set it to each Node.
+# Install Ceph to each Node from Admin Node.
 {
 	ssh-keygen -q -N ""
 cat <<EOF >> /etc/hosts
@@ -48,7 +49,7 @@ done
 
 ```bash
 # Configure [Monitor Daemon], [Manager Daemon] on Admin Node.
-$ {
+{
 	export CEPH_UUID=$(uuidgen)
 cat <<EOF > /etc/ceph/ceph.conf
 [global]
@@ -67,6 +68,7 @@ EOF
 }
 
 
+# Generate and configure keyrings for Ceph authentication
 {
     # generate secret key for Cluster monitoring
 	ceph-authtool --create-keyring /etc/ceph/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
@@ -79,6 +81,7 @@ EOF
 	ceph-authtool /etc/ceph/ceph.mon.keyring --import-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring
 }
 
+
 # generate monitor map
 {
 	FSID=$(grep "^fsid" /etc/ceph/ceph.conf | awk {'print $NF'})
@@ -87,6 +90,8 @@ EOF
 	monmaptool --create --add $NODENAME $NODEIP --fsid $FSID /etc/ceph/monmap
 }
 
+
+# Initialize and configure the Monitor and Manager Daemons
 {
     # create a directory for Monitor Daemon
     # directory name ⇒ (Cluster Name)-(Node Name)
@@ -107,6 +112,8 @@ EOF
 	ceph auth get-or-create mgr.$NODENAME mon 'allow profile mgr' osd 'allow *' mds 'allow *'
 }
 
+
+# Configure the Manager Daemon keyring and service
 {
 	ceph auth get-or-create mgr.node01 | tee /etc/ceph/ceph.mgr.admin.keyring
 	cp /etc/ceph/ceph.mgr.admin.keyring /var/lib/ceph/mgr/ceph-node01/keyring
@@ -119,13 +126,12 @@ EOF
 ```bash
 $ ceph -s
   cluster:
-    id:     3666a474-14e0-4c5f-ad1e-daf2e30aed8f
-    health: HEALTH_WARN
-            OSD count 0 < osd_pool_default_size 3
+    id:     c7e23d20-36e7-462d-b2b2-dbadc96b52e7
+    health: HEALTH_OK
 
   services:
-    mon: 1 daemons, quorum node01 (age 117s)
-    mgr: node01(active, since 25s)
+    mon: 1 daemons, quorum node01 (age 14s)
+    mgr: node01(active, since 3s)
     osd: 0 osds: 0 up, 0 in
 
   data:
@@ -156,27 +162,114 @@ done
 ```
 
 ```bash
+# Display the overall status of the Ceph cluster
+$ ceph -s
+  cluster:
+    id:     c7e23d20-36e7-462d-b2b2-dbadc96b52e7
+    health: HEALTH_OK
 
+  services:
+    mon: 1 daemons, quorum node01 (age 2m)
+    mgr: node01(active, since 2m)
+    mds: 1/1 daemons up
+    osd: 3 osds: 3 up (since 70s), 3 in (since 78s)
+
+  data:
+    volumes: 1/1 healthy
+    pools:   3 pools, 145 pgs
+    objects: 24 objects, 461 KiB
+    usage:   888 MiB used, 59 GiB / 60 GiB avail
+    pgs:     97.931% pgs unknown
+             142 unknown
+             3   active+clean
+
+  progress:
+    Global Recovery Event (0s)
+      [............................]
+
+
+# Display the hierarchical structure of OSDs in the Ceph cluster
+$ ceph osd tree
+ID  CLASS  WEIGHT   TYPE NAME        STATUS  REWEIGHT  PRI-AFF
+-1         0.05846  root default
+-3         0.01949      host node01
+ 0    hdd  0.01949          osd.0        up   1.00000  1.00000
+-5         0.01949      host node02
+ 1    hdd  0.01949          osd.1        up   1.00000  1.00000
+-7         0.01949      host node03
+ 2    hdd  0.01949          osd.2        up   1.00000  1.00000
+
+
+# Display storage usage summary for the Ceph cluster
+$ ceph df
+--- RAW STORAGE ---
+CLASS    SIZE   AVAIL     USED  RAW USED  %RAW USED
+hdd    60 GiB  59 GiB  897 MiB   897 MiB       1.46
+TOTAL  60 GiB  59 GiB  897 MiB   897 MiB       1.46
+
+--- POOLS ---
+POOL                    ID  PGS   STORED  OBJECTS     USED  %USED  MAX AVAIL
+.mgr                     1    1  449 KiB        2  1.3 MiB      0     19 GiB
+cephfs.kubernetes.meta   2   16   12 KiB       22  120 KiB      0     19 GiB
+cephfs.kubernetes.data   3  128      0 B        0      0 B      0     19 GiB
+
+
+# Display detailed storage usage for each OSD
+$ ceph osd df
+ID  CLASS  WEIGHT   REWEIGHT  SIZE    RAW USE  DATA     OMAP  META     AVAIL   %USE  VAR   PGS  STATUS
+ 0    hdd  0.01949   1.00000  20 GiB  299 MiB  940 KiB   0 B  298 MiB  20 GiB  1.46  1.00  145      up
+ 1    hdd  0.01949   1.00000  20 GiB  299 MiB  940 KiB   0 B  298 MiB  20 GiB  1.46  1.00  145      up
+ 2    hdd  0.01949   1.00000  20 GiB  299 MiB  936 KiB   0 B  298 MiB  20 GiB  1.46  1.00  145      up
+                       TOTAL  60 GiB  897 MiB  2.8 MiB   0 B  894 MiB  59 GiB  1.46
+MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 ```
 
 ```bash
-# 
+# Block for configuring Ceph MDS (Metadata Server)
 {
+	# Create the directory /var/lib/ceph/mds/ceph-node01 (if it doesn't exist)
 	mkdir -p /var/lib/ceph/mds/ceph-node01
+	
+	# Create a keyring file for MDS and generate a key for mds.node01
 	ceph-authtool --create-keyring /var/lib/ceph/mds/ceph-node01/keyring --gen-key -n mds.node01
-creating /var/lib/ceph/mds/ceph-node01/keyring
+	
+	# Output message from ceph-authtool indicating keyring creation
+	# creating /var/lib/ceph/mds/ceph-node01/keyring
+	
+	# Change ownership of the created directory and files to the ceph user and group
 	chown -R ceph:ceph /var/lib/ceph/mds/ceph-node01
+	
+	# Add permissions for the mds.node01 entity:
+	# - OSD: read/write/execute permissions
+	# - MDS: full permissions
+	# - MON: MDS profile permissions
+	# Use the keyring file for authentication
 	ceph auth add mds.node01 osd "allow rwx" mds "allow" mon "allow profile mds" -i /var/lib/ceph/mds/ceph-node01/keyring
+	
+	# Enable and start the ceph-mds@node01 service immediately
 	systemctl enable --now ceph-mds@node01
 }
 
-# 
+# Block for setting up and managing Ceph file system
 {
+	# Create a Ceph file system volume named 'kubernetes'
 	ceph fs volume create kubernetes
+	
+	# List all Ceph file systems
 	ceph fs ls
+	
+	# Create or retrieve a client.cephfs user with permissions:
+	# - MON: read permission
+	# - OSD: read/write/execute permissions on the kubernetes pool
 	ceph auth get-or-create client.cephfs mon 'allow r' osd 'allow rwx pool=kubernetes'
+	
+	# Check the status of MDS (e.g., whether it's active)
 	ceph mds stat
+	
+	# Create a subvolume group named 'csi' in the kubernetes file system
 	ceph fs subvolumegroup create kubernetes csi
+	
+	# List subvolume groups in the kubernetes file system
 	ceph fs subvolumegroup ls kubernetes
-}	
+}
 ```
