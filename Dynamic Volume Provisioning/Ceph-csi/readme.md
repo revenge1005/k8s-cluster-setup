@@ -23,6 +23,8 @@ or
 +-----------------------+    +-----------------------+    +-----------------------+
 ```
 
+<BR>
+
 ### A) Ceph : Configure Cluster #1
 
 ```bash
@@ -140,6 +142,8 @@ $ ceph -s
     usage:   0 B used, 0 B / 0 B avail
     pgs:
 ```
+
+<BR>
 
 ### B) Ceph : Configure Cluster #2
 
@@ -272,4 +276,117 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 	# List subvolume groups in the kubernetes file system
 	ceph fs subvolumegroup ls kubernetes
 }
+```
+
+<BR>
+
+### C) ceph-csi Configure (k8s-master)
+
+```bash
+# Install Helm, refer to here.
+curl -O https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+bash ./get-helm-3
+```
+
+```bash
+# Add the Ceph CSI Helm chart repository to the local Helm configuration
+helm repo add ceph-csi https://ceph.github.io/csi-charts
+
+# Search for available charts in the ceph-csi repository
+helm search repo ceph-csi
+```
+
+```bash
+# Create a configuration file for ceph-csi to connect to the Ceph cluster
+# The clusterID is obtained from the 'ceph -s' command on node01 of the Ceph cluster
+cat <<EOF > ceph-csi.vo
+csiConfig:
+- clusterID: "c7e23d20-36e7-462d-b2b2-dbadc96b52e7"
+  monitors:
+  - "192.168.219.51:6789"
+EOF
+
+# Create a dedicated Kubernetes namespace for ceph-csi-cephfs components
+{
+    kubectl create namespace "ceph-csi-cephfs"
+    # Install the ceph-csi-cephfs Helm chart in the specified namespace
+    # The chart integrates CephFS with Kubernetes via the CSI driver
+    # The -f flag applies the configuration from ceph-csi.vo
+    # Note: Installation may take some time depending on the test environment
+    helm install --namespace "ceph-csi-cephfs" "ceph-csi-cephfs" ceph-csi/ceph-csi-cephfs -f ceph-csi.vo
+    kubectl get all -n ceph-csi-cephfs
+}
+```
+
+```bash
+# The userKey is obtained from the Ceph cluster's management node using the "ceph auth list" command
+cat <<EOF > csi-fs-secret.yaml 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-fs-secret
+  namespace: kube-system
+stringData:
+  userID: cephfs
+  userKey: AQBeHA9oWD13KhAAzhysDMznCUfKhAEcjq5QTw==
+  adminID: admin
+  adminKey: AQD0Gw9ooEluMhAAntscL1ae3t62BYikI7+0pQ==
+EOF
+```
+
+### D) StorageClass Configuration and Deployment 
+
+```bash
+# Create a StorageClass configuration for CephFS using the Ceph CSI driver
+cat <<EOF > csi-fs-sc.yaml 
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+   name: csi-fs-sc
+allowVolumeExpansion: true
+provisioner: cephfs.csi.ceph.com
+parameters:
+   clusterID: 3adf5d85-7d69-455d-82cf-f799e63981e4
+   fsName: kubernetes
+   csi.storage.k8s.io/controller-expand-secret-name: csi-fs-secret
+   csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
+   csi.storage.k8s.io/provisioner-secret-name: csi-fs-secret
+   csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+   csi.storage.k8s.io/node-stage-secret-name: csi-fs-secret
+   csi.storage.k8s.io/node-stage-secret-namespace: kube-system
+reclaimPolicy: Delete
+mountOptions:
+   - debug
+EOF
+
+kubectl apply -f csi-fs-sc.yaml 
+```
+
+```bash
+# Create and Deploy pvc
+cat <<EOF > fs-pvc.yaml 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: csi-cephfs-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: csi-fs-sc
+EOF
+
+kubectl apply -f fs-pvc.yaml 
+```
+
+### E) 확인
+
+```bash
+$ kubectl get sc,pvc,pv
+
 ```
