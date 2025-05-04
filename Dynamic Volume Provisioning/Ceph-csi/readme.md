@@ -101,7 +101,7 @@ EOF
   ceph-mon --cluster ceph --mkfs -i $NODENAME --monmap /etc/ceph/monmap --keyring /etc/ceph/ceph.mon.keyring
   chown ceph:ceph /etc/ceph/ceph.*
   chown -R ceph:ceph /var/lib/ceph/mon/ceph-node01 /var/lib/ceph/bootstrap-osd
-	systemctl enable --now ceph-mon@$NODENAME
+  systemctl enable --now ceph-mon@$NODENAME
   # enable Messenger v2 Protocol
   ceph mon enable-msgr2
   ceph config set mon auth_allow_insecure_global_id_reclaim false
@@ -121,7 +121,7 @@ EOF
   cp /etc/ceph/ceph.mgr.admin.keyring /var/lib/ceph/mgr/ceph-node01/keyring
   chown ceph:ceph /etc/ceph/ceph.mgr.admin.keyring
   chown -R ceph:ceph /var/lib/ceph/mgr/ceph-node01
-	systemctl enable --now ceph-mgr@$NODENAME
+  systemctl enable --now ceph-mgr@$NODENAME
 }
 ```
 
