@@ -89,7 +89,7 @@ EOF
   FSID=$(grep "^fsid" /etc/ceph/ceph.conf | awk {'print $NF'})
   NODENAME=$(grep "^mon initial" /etc/ceph/ceph.conf | awk {'print $NF'})
   NODEIP=$(grep "^mon host" /etc/ceph/ceph.conf | awk {'print $NF'})
-	monmaptool --create --add $NODENAME $NODEIP --fsid $FSID /etc/ceph/monmap
+  monmaptool --create --add $NODENAME $NODEIP --fsid $FSID /etc/ceph/monmap
 }
 
 
