@@ -72,55 +72,55 @@ EOF
 
 # Generate and configure keyrings for Ceph authentication
 {
-    # generate secret key for Cluster monitoring
-	ceph-authtool --create-keyring /etc/ceph/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
-    # generate secret key for Cluster admin
-	ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow *' --cap mgr 'allow *'
-    # generate key for bootstrap
-	ceph-authtool --create-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring --gen-key -n client.bootstrap-osd --cap mon 'profile bootstrap-osd' --cap mgr 'allow r'
-    # import generated key
-	ceph-authtool /etc/ceph/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
+  # generate secret key for Cluster monitoring
+  ceph-authtool --create-keyring /etc/ceph/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
+  # generate secret key for Cluster admin
+  ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow *' --cap mgr 'allow *'
+  # generate key for bootstrap
+  ceph-authtool --create-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring --gen-key -n client.bootstrap-osd --cap mon 'profile bootstrap-osd' --cap mgr 'allow r'
+  # import generated key
+  ceph-authtool /etc/ceph/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
 	ceph-authtool /etc/ceph/ceph.mon.keyring --import-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring
 }
 
 
 # generate monitor map
 {
-	FSID=$(grep "^fsid" /etc/ceph/ceph.conf | awk {'print $NF'})
-	NODENAME=$(grep "^mon initial" /etc/ceph/ceph.conf | awk {'print $NF'})
-	NODEIP=$(grep "^mon host" /etc/ceph/ceph.conf | awk {'print $NF'})
+  FSID=$(grep "^fsid" /etc/ceph/ceph.conf | awk {'print $NF'})
+  NODENAME=$(grep "^mon initial" /etc/ceph/ceph.conf | awk {'print $NF'})
+  NODEIP=$(grep "^mon host" /etc/ceph/ceph.conf | awk {'print $NF'})
 	monmaptool --create --add $NODENAME $NODEIP --fsid $FSID /etc/ceph/monmap
 }
 
 
 # Initialize and configure the Monitor and Manager Daemons
 {
-    # create a directory for Monitor Daemon
-    # directory name ⇒ (Cluster Name)-(Node Name)
-	mkdir /var/lib/ceph/mon/ceph-node01
-	ceph-mon --cluster ceph --mkfs -i $NODENAME --monmap /etc/ceph/monmap --keyring /etc/ceph/ceph.mon.keyring
-	chown ceph. /etc/ceph/ceph.*
-	chown -R ceph. /var/lib/ceph/mon/ceph-node01 /var/lib/ceph/bootstrap-osd
+  # create a directory for Monitor Daemon
+  # directory name ⇒ (Cluster Name)-(Node Name)
+  mkdir /var/lib/ceph/mon/ceph-node01
+  ceph-mon --cluster ceph --mkfs -i $NODENAME --monmap /etc/ceph/monmap --keyring /etc/ceph/ceph.mon.keyring
+  chown ceph:ceph /etc/ceph/ceph.*
+  chown -R ceph:ceph /var/lib/ceph/mon/ceph-node01 /var/lib/ceph/bootstrap-osd
 	systemctl enable --now ceph-mon@$NODENAME
-    # enable Messenger v2 Protocol
-	ceph mon enable-msgr2
-	ceph config set mon auth_allow_insecure_global_id_reclaim false
-    # enable Placement Groups auto scale module
-	ceph mgr module enable pg_autoscaler
-    # create a directory for Manager Daemon
-    # directory name ⇒ (Cluster Name)-(Node Name)
-	mkdir /var/lib/ceph/mgr/ceph-node01
-    # create auth key
-	ceph auth get-or-create mgr.$NODENAME mon 'allow profile mgr' osd 'allow *' mds 'allow *'
+  # enable Messenger v2 Protocol
+  ceph mon enable-msgr2
+  ceph config set mon auth_allow_insecure_global_id_reclaim false
+  # enable Placement Groups auto scale module
+  ceph mgr module enable pg_autoscaler
+  # create a directory for Manager Daemon
+  # directory name ⇒ (Cluster Name)-(Node Name)
+  mkdir /var/lib/ceph/mgr/ceph-node01
+  # create auth key
+  ceph auth get-or-create mgr.$NODENAME mon 'allow profile mgr' osd 'allow *' mds 'allow *'
 }
 
 
 # Configure the Manager Daemon keyring and service
 {
-	ceph auth get-or-create mgr.node01 | tee /etc/ceph/ceph.mgr.admin.keyring
-	cp /etc/ceph/ceph.mgr.admin.keyring /var/lib/ceph/mgr/ceph-node01/keyring
-	chown ceph. /etc/ceph/ceph.mgr.admin.keyring
-	chown -R ceph. /var/lib/ceph/mgr/ceph-node01
+  ceph auth get-or-create mgr.node01 | tee /etc/ceph/ceph.mgr.admin.keyring
+  cp /etc/ceph/ceph.mgr.admin.keyring /var/lib/ceph/mgr/ceph-node01/keyring
+  chown ceph:ceph /etc/ceph/ceph.mgr.admin.keyring
+  chown -R ceph:ceph /var/lib/ceph/mgr/ceph-node01
 	systemctl enable --now ceph-mgr@$NODENAME
 }
 ```
@@ -158,11 +158,11 @@ do
         scp /var/lib/ceph/bootstrap-osd/ceph.keyring ${NODE}:/var/lib/ceph/bootstrap-osd
     fi
     ssh $NODE \
-    "chown ceph. /etc/ceph/ceph.* /var/lib/ceph/bootstrap-osd/*; \
+    "chown ceph:ceph /etc/ceph/ceph.* /var/lib/ceph/bootstrap-osd/*; \
     parted --script /dev/sdb 'mklabel gpt'; \
     parted --script /dev/sdb "mkpart primary 0% 100%"; \
     ceph-volume lvm create --data /dev/sdb1"
-done 
+done
 ```
 
 ```bash
@@ -237,9 +237,6 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 	# Create a keyring file for MDS and generate a key for mds.node01
 	ceph-authtool --create-keyring /var/lib/ceph/mds/ceph-node01/keyring --gen-key -n mds.node01
 	
-	# Output message from ceph-authtool indicating keyring creation
-	# creating /var/lib/ceph/mds/ceph-node01/keyring
-	
 	# Change ownership of the created directory and files to the ceph user and group
 	chown -R ceph:ceph /var/lib/ceph/mds/ceph-node01
 	
@@ -253,28 +250,32 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 	# Enable and start the ceph-mds@node01 service immediately
 	systemctl enable --now ceph-mds@node01
 }
+```
 
-# Block for setting up and managing Ceph file system
+```bash
+# Create 2 RADOS pools for Data and Metadata on the MDS Node.
+# Refer to the official documentation to specify the PG (Placement Group) number (64 in the example below).
 {
-	# Create a Ceph file system volume named 'kubernetes'
-	ceph fs volume create kubernetes
-	
-	# List all Ceph file systems
+	# Create a RADOS pool named cephfs_data for data storage with 32 PGs
+	ceph osd pool create cephfs_data 32
+
+	# Create a RADOS pool named cephfs_metadata for metadata storage with 32 PGs
+	ceph osd pool create cephfs_metadata 32
+
+	# Enable the bulk flag on the cephfs_data pool to optimize for large data workloads
+	ceph osd pool set cephfs_data bulk true
+
+	# Create a new Ceph filesystem named cephfs, associating it with the metadata and data pools
+	ceph fs new cephfs cephfs_metadata cephfs_data
+
+	# List all Ceph filesystems in the cluster
 	ceph fs ls
-	
-	# Create or retrieve a client.cephfs user with permissions:
-	# - MON: read permission
-	# - OSD: read/write/execute permissions on the kubernetes pool
-	ceph auth get-or-create client.cephfs mon 'allow r' osd 'allow rwx pool=kubernetes'
-	
-	# Check the status of MDS (e.g., whether it's active)
+
+	# Check the status of the Metadata Server (MDS) to ensure it is running correctly
 	ceph mds stat
-	
-	# Create a subvolume group named 'csi' in the kubernetes file system
-	ceph fs subvolumegroup create kubernetes csi
-	
-	# List subvolume groups in the kubernetes file system
-	ceph fs subvolumegroup ls kubernetes
+
+	# Display detailed status of the cephfs filesystem, including pool, MDS, and client information
+	ceph fs status cephfs
 }
 ```
 
