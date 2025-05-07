@@ -253,29 +253,21 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 ```
 
 ```bash
-# Create 2 RADOS pools for Data and Metadata on the MDS Node.
-# Refer to the official documentation to specify the PG (Placement Group) number (64 in the example below).
 {
-	# Create a RADOS pool named cephfs_data for data storage with 32 PGs
-	ceph osd pool create cephfs_data 32
-
-	# Create a RADOS pool named cephfs_metadata for metadata storage with 32 PGs
-	ceph osd pool create cephfs_metadata 32
-
-	# Enable the bulk flag on the cephfs_data pool to optimize for large data workloads
-	ceph osd pool set cephfs_data bulk true
-
-	# Create a new Ceph filesystem named cephfs, associating it with the metadata and data pools
-	ceph fs new cephfs cephfs_metadata cephfs_data
-
-	# List all Ceph filesystems in the cluster
+	# Create a new Ceph FS volume named 'kubernetes'
+	ceph fs volume create kubernetes
+	
+	# List all Ceph FS volumes
 	ceph fs ls
-
-	# Check the status of the Metadata Server (MDS) to ensure it is running correctly
+	
+	# Display the status of Ceph Metadata Servers (MDS)
 	ceph mds stat
-
-	# Display detailed status of the cephfs filesystem, including pool, MDS, and client information
-	ceph fs status cephfs
+	
+	# Create a subvolume group named 'csi' within the 'kubernetes' volume
+	ceph fs subvolumegroup create kubernetes csi
+	
+	# List all subvolume groups within the 'kubernetes' volume
+	ceph fs subvolumegroup ls kubernetes
 }
 ```
 
@@ -353,8 +345,6 @@ metadata:
   name: csi-fs-secret
   namespace: kube-system
 stringData:
-  userID: cephfs
-  userKey: AQBeHA9oWD13KhAAzhysDMznCUfKhAEcjq5QTw==
   adminID: admin
   adminKey: AQD0Gw9ooEluMhAAntscL1ae3t62BYikI7+0pQ==
 EOF
@@ -411,9 +401,40 @@ EOF
 kubectl apply -f fs-pvc.yaml 
 ```
 
-### E) 확인
+### E) Final verification
 
 ```bash
 $ kubectl get sc,pvc,pv
+NAME                                    PROVISIONER           RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+storageclass.storage.k8s.io/csi-fs-sc   cephfs.csi.ceph.com   Delete          Immediate           true                   11m
+
+NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/csi-cephfs-pvc   Bound    pvc-ca243a24-4fdd-41f9-b4f5-9c882cef250a   1Gi        RWX            csi-fs-sc      <unset>                 11m
+
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+persistentvolume/pvc-ca243a24-4fdd-41f9-b4f5-9c882cef250a   1Gi        RWX            Delete           Bound    default/csi-cephfs-pvc   csi-fs-sc      <unset>                          11m
+```
+
+```bash
+cat <<EOF > test-pod.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: csi-cephfs-demo-pod
+spec:
+  containers:
+    - name: web-server
+      image: docker.io/library/nginx:latest
+      volumeMounts:
+        - name: mypvc
+          mountPath: /var/lib/www
+  volumes:
+    - name: mypvc
+      persistentVolumeClaim:
+        claimName: csi-cephfs-pvc
+        readOnly: false
+EOF
+
 
 ```

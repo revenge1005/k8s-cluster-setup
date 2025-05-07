@@ -23,7 +23,7 @@ sudo apt-get update
 ### B) Install the Docker packages.
 
 ```bash
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
 ### C) Verify that the Docker Engine installation is successful by running the hello-world image.
@@ -37,8 +37,8 @@ sudo docker run hello-world
 - https://github.com/Mirantis/cri-dockerd
 
 ```bash
-wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.17/cri-dockerd_0.3.17.3-0.debian-bullseye_amd64.deb
-dpkg -i cri-dockerd_0.3.17.3-0.debian-bullseye_amd64.deb
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.4.0/cri-dockerd_0.4.0.3-0.debian-bullseye_amd64.deb
+dpkg -i cri-dockerd_0.4.0.3-0.debian-bullseye_amd64.deb
 systemctl status cri-docker
 ls -l  /var/run/cri-dockerd.sock
 ```
