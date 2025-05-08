@@ -58,15 +58,15 @@ sysctl --system
 
 ## 02. Choosing a container runtime.
 
-- [1. Installing Kubernetes with 'Docker Engine Runtime'](https://github.com/revenge1005/k8s-cluster-setup/tree/main/Container%20runtime/01.%20Docker%20Engine)
+- [1. Installing Kubernetes with 【 Docker Engine Runtime 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/Container%20runtime/01.%20Docker%20Engine)
 
   *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
-- [2. Installing Kubernetes with 'containerd Runtime'](https://github.com/revenge1005/k8s-cluster-setup/tree/main/Container%20runtime/02.%20containerd)
+- [2. Installing Kubernetes with 【 containerd Runtime 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/Container%20runtime/02.%20containerd)
 
 
 ## 03. (Optional) Dynamic Volume Provisioning
 
-- [1. Dynamic Volume Provisioning (NFS)](https://github.com/revenge1005/k8s-cluster-setup/blob/main/Dynamic%20Volume%20Provisioning/NFS/readme.md)
+- [1. 【 NFS 】](https://github.com/revenge1005/k8s-cluster-setup/blob/main/Dynamic%20Volume%20Provisioning/NFS/readme.md)
 
-- [2. Dynamic Volume Provisioning (Ceph-csi)]()
+- [2. 【 Ceph-csi 】]()
