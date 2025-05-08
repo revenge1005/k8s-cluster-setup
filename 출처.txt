@@ -1,0 +1,6 @@
+https://subicura.com/2019/05/19/kubernetes-basic-1.html
+https://kubernetes.io/ko/docs/concepts/overview/components/
+https://www.giffgaff.io/tech/resizing-statefulset-persistent-volumes-with-zero-downtime
+https://waspro.tistory.com/771
+https://infohub.delltechnologies.com/en-us/p/getting-started-with-container-storage-interface-csi-for-kubernetes-workloads/
+https://cpl.thalesgroup.com/ko/encryption/ciphertrust-transparent-data-encryption-kubernetes

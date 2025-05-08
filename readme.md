@@ -2,7 +2,7 @@
 
 Kubernetes Cluster Setup Guide.
 
-![node_info.drawio](https://github.com/revenge1005/k8s-cluster-setup/blob/main/node_info.drawio.png)
+![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
 
 ## 01. 사전 준비
 
