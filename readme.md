@@ -58,7 +58,7 @@ sysctl --system
 
 ## 02. Choosing a container runtime.
 
-- [1. Installing Kubernetes with 【 Docker Engine Runtime 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
+- [1. Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
 
   *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
