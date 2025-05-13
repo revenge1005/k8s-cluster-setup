@@ -1,4 +1,4 @@
-# 01. Installing a container runtime : All Nodes
+# 01. Installing a container runtime (containerd) : All Nodes
 
 ```bash
 apt -y install containerd
