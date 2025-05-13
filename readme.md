@@ -7,13 +7,18 @@ Kubernetes Cluster Setup Guide.
 ![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
 
 
-## 01. 사전 준비
+## Installation and Running
 
 - **VMware Workstation** : Create virtual machines with Ubuntu 24.04.
 - **Kubernetes Version** : 1.32
 - **Official Documentation**: [Kubernetes Setup Guide](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+- **CPU / Memory Setting(k8s-master,k8s-worker01,k8s-worker02)** : 
 
-### A) System Configuration for All Nodes (k8s-master, k8s-node01, k8s-node02)
+![cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/cpu_memory.PNG)
+
+### 사전 준비
+
+#### 1. System Configuration for All Nodes 
 
 ```bash
 # Add Kubernetes nodes to /etc/hosts for name resolution
@@ -31,7 +36,7 @@ swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
 swapon -s
 ```
 
-### B) Enable IPv4 Forwarding and Bridge Traffic - All Nodes
+#### 2. Enable IPv4 Forwarding and Bridge Traffic - All Nodes
 
 ```bash
 # Load required kernel modules for container networking
@@ -56,17 +61,17 @@ sysctl --system
 }
 ```
 
-## 02. Choosing a container runtime.
+#### 3. Choosing a container runtime. 
 
-- [1. Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
+[**1. Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
+
+[**2. Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
 
   *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
-
-- [2. Installing Kubernetes with 【 containerd Runtime 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
 
 ## 03. (Optional) Dynamic Volume Provisioning
 
-- [1. 【 NFS 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
+[**1. 【 NFS 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
 
-- [2. 【 Ceph-csi 】](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi)
+[**2. 【 Ceph-csi 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi)
