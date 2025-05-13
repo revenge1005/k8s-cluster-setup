@@ -9,7 +9,7 @@ Kubernetes Cluster Setup Guide.
 
 ## Installation and Running
 
-### 설치 환경
+### 1. 설치 환경
 
 - **VMware Workstation** : Create virtual machines with Ubuntu 24.04.
 - **Kubernetes Version** : 1.32
@@ -18,7 +18,7 @@ Kubernetes Cluster Setup Guide.
 
 ![cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/cpu_memory.PNG)
 
-### 사전 준비
+### 2. 사전 준비
 
 #### 01. System Configuration for All Nodes 
 
@@ -63,7 +63,7 @@ sysctl --system
 }
 ```
 
-### Choosing a container runtime. 
+### 3. Choosing a container runtime. 
 
 Select only one and install it.
 
@@ -73,10 +73,12 @@ Select only one and install it.
   * *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
 
-### (Optional) Dynamic Volume Provisioning
+### 4. (Optional) Dynamic Volume Provisioning
 
 Select only one and install it.
 
 * [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
 
 * [**Ceph-csi(Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi)
+
+* [**Ceph-csi()**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi)
