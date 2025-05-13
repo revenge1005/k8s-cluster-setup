@@ -65,11 +65,10 @@ sysctl --system
 
 [**A) Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
-[**B) Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine) 
-	- *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
+[**B) Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine) - *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
 
-## 03. (Optional) Dynamic Volume Provisioning
+#### 04. (Optional) Dynamic Volume Provisioning
 
 [**A) 【 NFS 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
 
