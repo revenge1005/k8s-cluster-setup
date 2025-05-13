@@ -53,7 +53,7 @@ sudo systemctl enable --now kubelet
 
 # 03. Creating a cluster with kubeadm
 
-### A) Initializing your control-plane node : k8s-master
+### A) Initializing your control-plane node - k8s-master
 
 ```bash
 # control-plane (master) component configuration
@@ -72,7 +72,7 @@ kubeadm join 192.168.219.100:6443 --token 2whvdj...qbbib \
   --cri-socket=unix:///run/containerd/containerd.sock
 ```
 
-### B) Installing a Pod network add-on
+### B) Installing a Pod network add-on - k8s-master
 
 ```bash
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
@@ -105,7 +105,7 @@ source <(kubectl completion bash)
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 ```
 
-### B) Install "etcd" - install ectcd on the control-plane (master)
+### B) Install "etcd" - install ectcd on the control-plane (k8s-master)
 
 ```bash
 export RELEASE=$(curl -s https://api.github.com/repos/etcd-io/etcd/releases/latest|grep tag_name | cut -d '"' -f 4)
