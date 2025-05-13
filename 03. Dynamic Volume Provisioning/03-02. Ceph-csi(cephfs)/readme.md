@@ -72,8 +72,9 @@ mon addr = 192.168.219.51
 mon allow pool delete = true
 EOF
 }
+```
 
-
+```bash
 # Generate and configure keyrings for Ceph authentication
 {
   # generate secret key for Cluster monitoring
@@ -86,8 +87,9 @@ EOF
   ceph-authtool /etc/ceph/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
   ceph-authtool /etc/ceph/ceph.mon.keyring --import-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring
 }
+```
 
-
+```bash
 # generate monitor map
 {
   FSID=$(grep "^fsid" /etc/ceph/ceph.conf | awk {'print $NF'})
@@ -95,8 +97,9 @@ EOF
   NODEIP=$(grep "^mon host" /etc/ceph/ceph.conf | awk {'print $NF'})
   monmaptool --create --add $NODENAME $NODEIP --fsid $FSID /etc/ceph/monmap
 }
+```
 
-
+```bash
 # Initialize and configure the Monitor and Manager Daemons
 {
   # create a directory for Monitor Daemon
@@ -117,8 +120,9 @@ EOF
   # create auth key
   ceph auth get-or-create mgr.$NODENAME mon 'allow profile mgr' osd 'allow *' mds 'allow *'
 }
+```
 
-
+```bash
 # Configure the Manager Daemon keyring and service
 {
   ceph auth get-or-create mgr.node01 | tee /etc/ceph/ceph.mgr.admin.keyring
