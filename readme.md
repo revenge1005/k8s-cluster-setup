@@ -63,14 +63,14 @@ sysctl --system
 
 ### Choosing a container runtime. 
 
-1. [**Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
+* [**Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
-2. [**Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
-	- *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
+* [**Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
+  * *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
 
 ### (Optional) Dynamic Volume Provisioning
 
-1. [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
+* [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
 
-2. [**Ceph-csi(Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi)
+* [**Ceph-csi(Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi)
