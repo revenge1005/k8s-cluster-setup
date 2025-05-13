@@ -238,45 +238,15 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 ```
 
 ```bash
-# Block for configuring Ceph MDS (Metadata Server)
 {
-	# Create the directory /var/lib/ceph/mds/ceph-node01 (if it doesn't exist)
-	mkdir -p /var/lib/ceph/mds/ceph-node01
-	
-	# Create a keyring file for MDS and generate a key for mds.node01
-	ceph-authtool --create-keyring /var/lib/ceph/mds/ceph-node01/keyring --gen-key -n mds.node01
-	
-	# Change ownership of the created directory and files to the ceph user and group
-	chown -R ceph:ceph /var/lib/ceph/mds/ceph-node01
-	
-	# Add permissions for the mds.node01 entity:
-	# - OSD: read/write/execute permissions
-	# - MDS: full permissions
-	# - MON: MDS profile permissions
-	# Use the keyring file for authentication
-	ceph auth add mds.node01 osd "allow rwx" mds "allow" mon "allow profile mds" -i /var/lib/ceph/mds/ceph-node01/keyring
-	
-	# Enable and start the ceph-mds@node01 service immediately
-	systemctl enable --now ceph-mds@node01
-}
-```
-
-```bash
-{
-	# Create a new Ceph FS volume named 'kubernetes'
-	ceph fs volume create kubernetes
-	
-	# List all Ceph FS volumes
-	ceph fs ls
-	
-	# Display the status of Ceph Metadata Servers (MDS)
-	ceph mds stat
-	
-	# Create a subvolume group named 'csi' within the 'kubernetes' volume
-	ceph fs subvolumegroup create kubernetes csi
-	
-	# List all subvolume groups within the 'kubernetes' volume
-	ceph fs subvolumegroup ls kubernetes
+  # create Kubernetes pool [rbd]
+	ceph osd pool create kubernetes
+  # initialize the pool
+  rbd pool init kubernetes
+  # Create the user for Kubernetes
+  ceph auth get-or-create client.kubernetes mon 'profile rbd' osd 'profile rbd pool=kubernetes' mgr 'profile rbd pool=kubernetes'
+  ceph osd pool autoscale-status
+  ceph mon dump
 }
 ```
 
@@ -284,42 +254,99 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 
 # 2. k8s Setting
 
-### A) ceph-csi (cephfs) Configure (k8s-master)
+### A) ceph-csi (rbd) Configure (k8s-master)
 
 ```bash
-# Install Helm, refer to here.
-curl -O https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-bash ./get-helm-3
-```
-
-```bash
-# Add the Ceph CSI Helm chart repository to the local Helm configuration
-helm repo add ceph-csi https://ceph.github.io/csi-charts
-
-# Search for available charts in the ceph-csi repository
-helm search repo ceph-csi
-```
-
-```bash
-# Create a configuration file for ceph-csi to connect to the Ceph cluster
+# ConfigMap with CSI configuration.
 # The clusterID is obtained from the 'ceph -s' command on node01 of the Ceph cluster
-cat <<EOF > ceph-csi.vo
-csiConfig:
-- clusterID: "c7e23d20-36e7-462d-b2b2-dbadc96b52e7"
-  monitors:
-  - "192.168.219.51:6789"
+cat <<EOF > csi-config-map.yaml
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  config.json: |-
+    [
+      {
+        "clusterID": "233a71ec-7b10-11ee-a5c8-f76cb62122db", 
+        "monitors": [
+          "192.168.10.51:6789"
+        ]
+      }
+    ]
+metadata:
+  name: ceph-csi-config
 EOF
 
-# Create a dedicated Kubernetes namespace for ceph-csi-cephfs components
-{
-    kubectl create namespace "ceph-csi-cephfs"
-    # Install the ceph-csi-cephfs Helm chart in the specified namespace
-    # The chart integrates CephFS with Kubernetes via the CSI driver
-    # The -f flag applies the configuration from ceph-csi.vo
-    # Note: Installation may take some time depending on the test environment
-    helm install --namespace "ceph-csi-cephfs" "ceph-csi-cephfs" ceph-csi/ceph-csi-cephfs -f ceph-csi.vo
-    watch kubectl get all -n ceph-csi-cephfs
-}
+kubectl create -f csi-config-map.yaml
+```
+
+```bash
+# ConfigMap with KMS configuration.
+cat <<EOF > csi-kms-config-map.yaml
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  config.json: |-
+    {}
+metadata:
+  name: ceph-csi-encryption-kms-config
+EOF
+
+kubectl create -f csi-kms-config-map.yaml
+```
+
+```bash
+# Another config map required for Ceph CSI (I don't remember why)
+cat <<EOF > ceph-config-map.yaml
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  ceph.conf: |
+    [global]
+    auth_cluster_required = cephx
+    auth_service_required = cephx
+    auth_client_required = cephx
+  # keyring is a required key and its value should be empty
+  keyring: |
+metadata:
+  name: ceph-config
+EOF
+
+kubectl create -f ceph-config-map.yaml
+```
+
+```bash
+# Secret with the user and key created before.
+# The userKey is obtained from the Ceph cluster's management node using the "ceph auth list" command
+cat <<EOF > csi-rbd-secret.yaml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-rbd-secret
+  namespace: default
+stringData:
+  userID: kubernetes
+  userKey: AQClQkZlHuZYLRAA0JuPOkWGtNujPrLwNoNcXQ== #key (remember?)
+EOF
+
+kubectl create -f csi-rbd-secret.yaml
+```
+
+```bash
+# Create the Roles
+kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-provisioner-rbac.yaml
+kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-nodeplugin-rbac.yaml
+```
+
+```bash
+# Deploy the provisioner and the node plugin
+wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin-provisioner.yaml
+kubectl apply -f csi-rbdplugin-provisioner.yaml
+wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin.yaml
+kubectl apply -f csi-rbdplugin.yaml
 ```
 
 ```bash
@@ -346,79 +373,78 @@ NAME                                                    DESIRED   CURRENT   READ
 replicaset.apps/ceph-csi-cephfs-provisioner-bff7587bd   3         3         2       13m
 ```
 
-```bash
-# The userKey is obtained from the Ceph cluster's management node using the "ceph auth list" command
-cat <<EOF > csi-fs-secret.yaml 
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: csi-fs-secret
-  namespace: kube-system
-stringData:
-  adminID: admin
-  adminKey: AQD0Gw9ooEluMhAAntscL1ae3t62BYikI7+0pQ==
-EOF
-
-kubectl apply -f csi-fs-secret.yaml 
-```
-
-### B) install 'ceph-fuse' - worker nodes(k8s-worker01, k8s-worker02) 
-
-```bash
-apt -y install ceph-fuse
-```
-
 ### C) StorageClass Configuration and Deployment 
 
 ```bash
 # Create a StorageClass configuration for CephFS using the Ceph CSI driver
-cat <<EOF > csi-fs-sc.yaml 
+cat <<EOF > csi-rbd-sc.yaml
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-   name: csi-fs-sc
-allowVolumeExpansion: true
-provisioner: cephfs.csi.ceph.com
+   name: csi-rbd-sc
+provisioner: rbd.csi.ceph.com
 parameters:
-   clusterID: c7e23d20-36e7-462d-b2b2-dbadc96b52e7
-   fsName: kubernetes
-   mounter: fuse
-   csi.storage.k8s.io/controller-expand-secret-name: csi-fs-secret
-   csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
-   csi.storage.k8s.io/provisioner-secret-name: csi-fs-secret
-   csi.storage.k8s.io/provisioner-secret-namespace: kube-system
-   csi.storage.k8s.io/node-stage-secret-name: csi-fs-secret
-   csi.storage.k8s.io/node-stage-secret-namespace: kube-system
+   clusterID: 233a71ec-7b10-11ee-a5c8-f76cb62122db 
+   pool: kubernetes
+   imageFeatures: layering
+   csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret
+   csi.storage.k8s.io/provisioner-secret-namespace: default
+   csi.storage.k8s.io/controller-expand-secret-name: csi-rbd-secret
+   csi.storage.k8s.io/controller-expand-secret-namespace: default
+   csi.storage.k8s.io/node-stage-secret-name: csi-rbd-secret
+   csi.storage.k8s.io/node-stage-secret-namespace: default
 reclaimPolicy: Delete
+allowVolumeExpansion: true
 mountOptions:
-   - debug
+   - discard
 EOF
 
-kubectl apply -f csi-fs-sc.yaml 
+kubectl apply -f csi-rbd-sc.yaml
 ```
 
 ### D) Final verification
 
 ```bash
-# Create and Deploy pvc
-cat <<EOF > fs-pvc.yaml 
+# Create a PVC to be used as raw block device (volumeMode: Block)
+cat <<EOF > raw-block-pvc.yaml
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: csi-cephfs-pvc
+  name: raw-block-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  volumeMode: Block
   resources:
     requests:
       storage: 1Gi
-  storageClassName: csi-fs-sc
+  storageClassName: csi-rbd-sc
 EOF
 
-kubectl apply -f fs-pvc.yaml 
+kubectl apply -f raw-block-pvc.yaml
+```
+
+```bash
+# Create a new PVC now to be used as FS (volumeMode: Filesystem)
+cat <<EOF > pvc.yaml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rbd-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: csi-rbd-sc
+EOF
+
+kubectl apply -f pvc.yaml
 ```
 
 ```bash
@@ -434,27 +460,54 @@ persistentvolume/pvc-ca243a24-4fdd-41f9-b4f5-9c882cef250a   1Gi        RWX      
 ```
 
 ```bash
-$ cat <<EOF > test-pod.yaml
+# Create a pod with the PVC as a raw block device
+cat <<EOF > raw-block-pod.yaml
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: csi-cephfs-demo-pod
+  name: pod-with-raw-block-volume
+spec:
+  containers:
+    - name: fc-container
+      image: fedora:26
+      command: ["/bin/sh", "-c"]
+      args: ["tail -f /dev/null"]
+      volumeDevices:
+        - name: data
+          devicePath: /dev/xvda
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: raw-block-pvc
+EOF
+
+kubectl apply -f raw-block-pod.yaml
+```
+
+```bash
+# Create a pod and mount the PVC as a FS
+cat <<EOF > pod.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: csi-rbd-demo-pod
 spec:
   containers:
     - name: web-server
-      image: docker.io/library/nginx:latest
+      image: nginx
       volumeMounts:
         - name: mypvc
-          mountPath: /var/lib/www
+          mountPath: /var/lib/www/html
   volumes:
     - name: mypvc
       persistentVolumeClaim:
-        claimName: csi-cephfs-pvc
+        claimName: rbd-pvc
         readOnly: false
 EOF
 
-$ kubectl apply -f test-pod.yaml
+kubectl apply -f pod.yaml
 ```
 
 ```bash
