@@ -16,7 +16,7 @@ Kubernetes Cluster Setup Guide.
 - **Official Documentation**: [Kubernetes Setup Guide](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 - **CPU / Memory Setting(k8s-master,k8s-worker01,k8s-worker02)** : 
 
-![cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/cpu_memory.PNG)
+![cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s_cpu_memory.PNG)
 
 ### 2. 사전 준비
 
