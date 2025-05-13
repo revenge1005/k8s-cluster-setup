@@ -45,7 +45,7 @@ ls -l  /var/run/cri-dockerd.sock
 
 <BR>
 
-## 02. Installing kubeadm : ALL Node
+# 02. Installing kubeadm : ALL Node
 
 ### A) Installing kubeadm, kubelet and kubectl
 
@@ -78,7 +78,7 @@ sudo systemctl enable --now kubelet
 
 <BR>
 
-## 03. Creating a cluster with kubeadm
+# 03. Creating a cluster with kubeadm
 
 ### A) Initializing your control-plane node : k8s-master
 
@@ -110,7 +110,7 @@ watch -n 3 kubectl get nodes
 
 <BR>
 
-## 04. Joining nodes - worker01, worker02
+# 04. Joining nodes - worker01, worker02
 
 ```bash
 kubeadm join 192.168.219.100:6443 --token 2whv...bbib \
@@ -120,7 +120,7 @@ kubeadm join 192.168.219.100:6443 --token 2whv...bbib \
 
 <BR>
 
-## 05. Default Configuration
+# 05. Default Configuration
 
 ### A) Set kubectl command autocomplete
 
@@ -147,7 +147,7 @@ etcd --version
 
 <BR>
 
-## 6. Final verification
+# 6. Final verification
 
 ```bash
 $ kubectl get nodes -o wide
