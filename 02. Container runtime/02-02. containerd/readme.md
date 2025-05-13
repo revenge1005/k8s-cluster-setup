@@ -122,7 +122,7 @@ etcd --version
 
 # 6. Final verification
 
-![k8s-nodes-get-01]()
+![k8s-nodes-get-01](https://github.com/revenge1005/k8s-cluster-setup/blob/main/02.%20Container%20runtime/02-02.%20containerd/k8s-nodes-get-01.PNG)
 
 ```bash
 $ kubectl get nodes -o wide
@@ -156,4 +156,4 @@ EOF
 $ kubectl apply -f test_delpoy.yaml
 ```
 
-![k8s-nodes-get-02]()
+![k8s-nodes-get-02](https://github.com/revenge1005/k8s-cluster-setup/blob/main/02.%20Container%20runtime/02-02.%20containerd/k8s-nodes-get-02.PNG)
