@@ -63,6 +63,8 @@ sysctl --system
 
 ### Choosing a container runtime. 
 
+Select only one and install it.
+
 * [**Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
 * [**Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
@@ -70,6 +72,8 @@ sysctl --system
 
 
 ### (Optional) Dynamic Volume Provisioning
+
+Select only one and install it.
 
 * [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
 
