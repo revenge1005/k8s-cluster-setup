@@ -182,7 +182,9 @@ spec:
 EOF
 
 $ kubectl apply -f test_delpoy.yml
+```
 
+```
 $ kubectl get all -o wide
 NAME                              READY   STATUS    RESTARTS   AGE   IP          NODE            NOMINATED NODE   READINESS GATES
 pod/web-deploy-585ff9c9b9-5dlwq   1/1     Running   0          13s   10.40.0.1   k8s-worker01    <none>           <none>
