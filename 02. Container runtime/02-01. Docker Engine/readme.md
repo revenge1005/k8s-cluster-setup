@@ -1,8 +1,8 @@
 # 1. Installing a container runtime (Docker Engine) : All Nodes 
 
 ### A) Set up Docker's apt repository.
-
-**Official Documentation**: [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+ 
+- **Official Documentation**: [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
 ```bash
 # Add Docker's official GPG key:
