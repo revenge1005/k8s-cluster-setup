@@ -23,6 +23,10 @@ or
 +-----------------------+    +-----------------------+    +-----------------------+
 ```
 
+- **ceph node setting:**
+
+![ceph_cpu_memory]()
+
 <BR>
 
 ### A) Ceph : Configure Cluster #1
@@ -273,7 +277,9 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 
 <BR>
 
-### C) ceph-csi Configure (k8s-master)
+# 2. k8s Setting
+
+### A) ceph-csi Configure (k8s-master)
 
 ```bash
 # Install Helm, refer to here.
@@ -352,7 +358,7 @@ EOF
 kubectl apply -f csi-fs-secret.yaml 
 ```
 
-### D) StorageClass Configuration and Deployment 
+### B) StorageClass Configuration and Deployment 
 
 ```bash
 # Create a StorageClass configuration for CephFS using the Ceph CSI driver
@@ -367,6 +373,7 @@ provisioner: cephfs.csi.ceph.com
 parameters:
    clusterID: c7e23d20-36e7-462d-b2b2-dbadc96b52e7
    fsName: kubernetes
+   mounter: fuse
    csi.storage.k8s.io/controller-expand-secret-name: csi-fs-secret
    csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
    csi.storage.k8s.io/provisioner-secret-name: csi-fs-secret
@@ -401,7 +408,13 @@ EOF
 kubectl apply -f fs-pvc.yaml 
 ```
 
-### E) Final verification
+### C) install 'ceph-fuse' - worker nodes(k8s-worker01, k8s-worker02) 
+
+```bash
+apt -y install ceph-fuse
+```
+
+### D) Final verification
 
 ```bash
 $ kubectl get sc,pvc,pv
@@ -416,7 +429,7 @@ persistentvolume/pvc-ca243a24-4fdd-41f9-b4f5-9c882cef250a   1Gi        RWX      
 ```
 
 ```bash
-cat <<EOF > test-pod.yaml
+$ cat <<EOF > test-pod.yaml
 ---
 apiVersion: v1
 kind: Pod
@@ -436,5 +449,5 @@ spec:
         readOnly: false
 EOF
 
-
+$ kubectl get pod,pvc,pv
 ```
