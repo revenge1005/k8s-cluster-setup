@@ -10,8 +10,9 @@ or
 
 # 1. Kubernetes : Dynamic Volume Provisioning (Ceph-csi(cephfs))
 
+- **Ceph Cluster**
+
 ```bash
-# Ceph Cluster
             +----------------------------+----------------------------+
             |                            |                            |
             |192.168.219.51              |192.168.219.52              |192.168.219.53
