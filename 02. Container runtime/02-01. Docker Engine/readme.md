@@ -1,4 +1,4 @@
-# 1. Installing a container runtime (Docker Engine) : All Nodes 
+# 01. Installing a container runtime (Docker Engine) : All Nodes 
 
 ### A) Set up Docker's apt repository.
  
