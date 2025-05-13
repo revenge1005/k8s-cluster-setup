@@ -125,14 +125,6 @@ etcd --version
 ![k8s-nodes-get-01](https://github.com/revenge1005/k8s-cluster-setup/blob/main/02.%20Container%20runtime/02-02.%20containerd/k8s-nodes-get-01.PNG)
 
 ```bash
-$ kubectl get nodes -o wide
-NAME            STATUS   ROLES           AGE     VERSION   INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
-k8s-master      Ready    control-plane   2m14s   v1.32.4   192.168.219.10   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
-k8s-worker01    Ready    <none>          53s     v1.32.4   192.168.219.11   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
-k8s-worker02    Ready    <none>          44s     v1.32.4   192.168.219.12   <none>        Ubuntu 24.04.2 LTS   6.8.0-51-generic   containerd://1.7.24
-```
-
-```bash
 $ cat <<EOF > test_delpoy.yaml
 apiVersion: apps/v1
 kind: Deployment
