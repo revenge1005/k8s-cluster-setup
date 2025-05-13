@@ -1,4 +1,4 @@
-## 00. 선행 작업
+# 0. 선행 작업
 
 - [1. Installing Kubernetes with Docker Engine Runtime](https://github.com/revenge1005/k8s-cluster-setup/tree/main/Container%20runtime/01.%20Docker%20Engine)
 
@@ -8,7 +8,7 @@ or
 
 <br>
 
-## 01. Kubernetes : Dynamic Volume Provisioning (NFS)
+# 1. Kubernetes : Dynamic Volume Provisioning (NFS)
 
 
 ```
@@ -80,7 +80,7 @@ nfs-client-nfs-subdir-external-provisioner   1/1     1            1           19
 
 <br>
 
-## 02. This is an example to use dynamic volume provisioning by a Pod.
+# 2. This is an example to use dynamic volume provisioning by a Pod.
 
 ```bash
 cat <<EOF >  my-pvc.yml

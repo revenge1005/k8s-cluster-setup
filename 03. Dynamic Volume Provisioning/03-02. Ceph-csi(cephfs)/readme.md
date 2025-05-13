@@ -1,4 +1,4 @@
-## 00. 선행 작업
+# 0. 선행 작업
 
 - [1. Installing Kubernetes with Docker Engine Runtime](https://github.com/revenge1005/k8s-cluster-setup/tree/main/Container%20runtime/01.%20Docker%20Engine)
 
@@ -8,7 +8,7 @@ or
 
 <br>
 
-## 01. Kubernetes : Dynamic Volume Provisioning (Ceph-csi)
+# 1. Kubernetes : Dynamic Volume Provisioning (Ceph-csi(cephfs))
 
 ```bash
 # Ceph Cluster
