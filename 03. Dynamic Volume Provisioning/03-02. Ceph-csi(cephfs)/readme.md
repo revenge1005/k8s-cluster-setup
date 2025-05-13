@@ -363,7 +363,13 @@ EOF
 kubectl apply -f csi-fs-secret.yaml 
 ```
 
-### B) StorageClass Configuration and Deployment 
+### B) install 'ceph-fuse' - worker nodes(k8s-worker01, k8s-worker02) 
+
+```bash
+apt -y install ceph-fuse
+```
+
+### C) StorageClass Configuration and Deployment 
 
 ```bash
 # Create a StorageClass configuration for CephFS using the Ceph CSI driver
@@ -393,6 +399,8 @@ EOF
 kubectl apply -f csi-fs-sc.yaml 
 ```
 
+### D) Final verification
+
 ```bash
 # Create and Deploy pvc
 cat <<EOF > fs-pvc.yaml 
@@ -412,14 +420,6 @@ EOF
 
 kubectl apply -f fs-pvc.yaml 
 ```
-
-### C) install 'ceph-fuse' - worker nodes(k8s-worker01, k8s-worker02) 
-
-```bash
-apt -y install ceph-fuse
-```
-
-### D) Final verification
 
 ```bash
 $ kubectl get sc,pvc,pv
