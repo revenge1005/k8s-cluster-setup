@@ -20,7 +20,7 @@ Kubernetes Cluster Setup Guide.
 
 ### 2. 사전 준비
 
-#### 01. System Configuration for All Nodes 
+#### A) System Configuration for All Nodes 
 
 ```bash
 # Add Kubernetes nodes to /etc/hosts for name resolution
@@ -38,7 +38,7 @@ swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
 swapon -s
 ```
 
-#### 02. Enable IPv4 Forwarding and Bridge Traffic - All Nodes
+#### B) Enable IPv4 Forwarding and Bridge Traffic - All Nodes
 
 ```bash
 # Load required kernel modules for container networking
