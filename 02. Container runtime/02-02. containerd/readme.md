@@ -8,7 +8,7 @@ containerd config default | tee /etc/containerd/config.toml
 
 vi /etc/containerd/config.toml
 # line 65 : change
-sandbox_image = "registry.k8s.io/pause:3.9"
+sandbox_image = "registry.k8s.io/pause:3.10"
 
 # line 137 : change
 SystemdCgroup = true
