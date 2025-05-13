@@ -18,7 +18,7 @@ Kubernetes Cluster Setup Guide.
 
 ### 사전 준비
 
-#### 1. System Configuration for All Nodes 
+#### 01. System Configuration for All Nodes 
 
 ```bash
 # Add Kubernetes nodes to /etc/hosts for name resolution
@@ -36,7 +36,7 @@ swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
 swapon -s
 ```
 
-#### 2. Enable IPv4 Forwarding and Bridge Traffic - All Nodes
+#### 02. Enable IPv4 Forwarding and Bridge Traffic - All Nodes
 
 ```bash
 # Load required kernel modules for container networking
@@ -61,7 +61,7 @@ sysctl --system
 }
 ```
 
-#### 3. Choosing a container runtime. 
+### Choosing a container runtime. 
 
 1. [**Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
@@ -69,7 +69,7 @@ sysctl --system
 	- *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
 
-#### 04. (Optional) Dynamic Volume Provisioning
+### (Optional) Dynamic Volume Provisioning
 
 1. [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
 
