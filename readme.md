@@ -9,6 +9,8 @@ Kubernetes Cluster Setup Guide.
 
 ## Installation and Running
 
+### 설치 환경
+
 - **VMware Workstation** : Create virtual machines with Ubuntu 24.04.
 - **Kubernetes Version** : 1.32
 - **Official Documentation**: [Kubernetes Setup Guide](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
