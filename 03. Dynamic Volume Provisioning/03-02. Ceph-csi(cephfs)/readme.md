@@ -454,5 +454,22 @@ spec:
         readOnly: false
 EOF
 
+$ kubectl apply -f test-pod.yaml
+```
+
+```bash
 $ kubectl get pod,pvc,pv
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/csi-cephfs-demo-pod           1/1     Running   0          75s
+
+NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/csi-cephfs-pvc   Bound    pvc-675e6e84-e78a-4d74-bea1-6908509fbe3c   1Gi        RWX            csi-fs-sc      <unset>                 2m59s
+
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+persistentvolume/pvc-675e6e84-e78a-4d74-bea1-6908509fbe3c   1Gi        RWX            Delete           Bound    default/csi-cephfs-pvc   csi-fs-sc      <unset>                          2m59s
+
+
+$ kubectl exec csi-cephfs-demo-pod -- df /var/lib/www
+Filesystem     1K-blocks  Used Available Use% Mounted on
+ceph-fuse        1048576     0   1048576   0% /var/lib/www
 ```
