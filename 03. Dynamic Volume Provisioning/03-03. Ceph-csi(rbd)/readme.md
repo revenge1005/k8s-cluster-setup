@@ -240,7 +240,7 @@ MIN/MAX VAR: 1.00/1.00  STDDEV: 0
 ```bash
 {
   # create Kubernetes pool [rbd]
-	ceph osd pool create kubernetes
+  ceph osd pool create kubernetes
   # initialize the pool
   rbd pool init kubernetes
   # Create the user for Kubernetes
