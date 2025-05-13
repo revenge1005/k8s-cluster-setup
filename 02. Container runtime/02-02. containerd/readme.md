@@ -4,8 +4,9 @@
 apt -y install containerd
 mkdir /etc/containerd
 containerd config default | tee /etc/containerd/config.toml
+```
 
-
+```bash
 vi /etc/containerd/config.toml
 # line 65 : change
 sandbox_image = "registry.k8s.io/pause:3.10"
