@@ -122,6 +122,8 @@ etcd --version
 
 # 6. Final verification
 
+![k8s-nodes-get-01]()
+
 ```bash
 $ kubectl get nodes -o wide
 NAME            STATUS   ROLES           AGE     VERSION   INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
@@ -151,20 +153,7 @@ spec:
         image: nginx:1.16
 EOF
 
-$ kubectl apply -f test_delpoy.yml
-
-$ kubectl get all -o wide
-NAME                              READY   STATUS    RESTARTS   AGE   IP          NODE            NOMINATED NODE   READINESS GATES
-pod/web-deploy-585ff9c9b9-5dlwq   1/1     Running   0          13s   10.40.0.1   k8s-worker01    <none>           <none>
-pod/web-deploy-585ff9c9b9-lfxh7   1/1     Running   0          13s   10.38.0.1   k8s-worker02    <none>           <none>
-pod/web-deploy-585ff9c9b9-zxb68   1/1     Running   0          13s   10.38.0.2   k8s-worker02    <none>           <none>
-
-NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
-service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   13m   <none>
-
-NAME                         READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES       SELECTOR
-deployment.apps/web-deploy   3/3     3            3           13s   nginx        nginx:1.16   app=web
-
-NAME                                    DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES       SELECTOR
-replicaset.apps/web-deploy-585ff9c9b9   3         3         3       13s   nginx        nginx:1.16   app=web,pod-template-hash=585ff9c9b9
+$ kubectl apply -f test_delpoy.yaml
 ```
+
+![k8s-nodes-get-02]()
