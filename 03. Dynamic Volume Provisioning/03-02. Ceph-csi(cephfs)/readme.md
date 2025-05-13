@@ -25,7 +25,7 @@ or
 
 - **ceph node setting:**
 
-![ceph_cpu_memory]()
+![ceph_cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi(cephfs)/ceph_cpu_memory.PNG)
 
 <BR>
 
