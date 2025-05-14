@@ -267,9 +267,9 @@ data:
   config.json: |-
     [
       {
-        "clusterID": "233a71ec-7b10-11ee-a5c8-f76cb62122db", 
+        "clusterID": "e6816ea6-d91c-40c4-b5e7-e6d27729e400",
         "monitors": [
-          "192.168.10.51:6789"
+          "192.168.219.51:6789"
         ]
       }
     ]
@@ -329,7 +329,7 @@ metadata:
   namespace: default
 stringData:
   userID: kubernetes
-  userKey: AQClQkZlHuZYLRAA0JuPOkWGtNujPrLwNoNcXQ== #key (remember?)
+  userKey: AQB+ayRoJMB0BhAAAy6hKs2qPxV2c/W7Fk+RYQ==
 EOF
 
 kubectl create -f csi-rbd-secret.yaml
@@ -350,27 +350,27 @@ kubectl apply -f csi-rbdplugin.yaml
 ```
 
 ```bash
-$ kubectl get all -n ceph-csi-cephfs
+$ kubectl get all
+NAME                                             READY   STATUS    RESTARTS   AGE
+pod/csi-rbdplugin-57ztr                          3/3     Running   0          2m22s
+pod/csi-rbdplugin-p9t5j                          3/3     Running   0          2m22s
+pod/csi-rbdplugin-provisioner-74c5fc75db-jchsh   0/7     Pending   0          2m22s
+pod/csi-rbdplugin-provisioner-74c5fc75db-rn2gz   7/7     Running   0          2m22s
+pod/csi-rbdplugin-provisioner-74c5fc75db-s6994   7/7     Running   0          2m22s
 
-NAME                                              READY   STATUS    RESTARTS   AGE
-pod/ceph-csi-cephfs-nodeplugin-cdqkj              3/3     Running   0          13m
-pod/ceph-csi-cephfs-nodeplugin-xtfv2              3/3     Running   0          13m
-pod/ceph-csi-cephfs-provisioner-bff7587bd-72zwk   5/5     Running   0          13m
-pod/ceph-csi-cephfs-provisioner-bff7587bd-ckqmn   5/5     Running   0          13m
-pod/ceph-csi-cephfs-provisioner-bff7587bd-m2kqc   0/5     Pending   0          13m
+NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/csi-metrics-rbdplugin       ClusterIP   10.106.8.173    <none>        8080/TCP   2m22s
+service/csi-rbdplugin-provisioner   ClusterIP   10.97.230.101   <none>        8080/TCP   2m22s
+service/kubernetes                  ClusterIP   10.96.0.1       <none>        443/TCP    12m
 
-NAME                                               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-service/ceph-csi-cephfs-nodeplugin-http-metrics    ClusterIP   10.103.142.135   <none>        8080/TCP   13m
-service/ceph-csi-cephfs-provisioner-http-metrics   ClusterIP   10.105.138.116   <none>        8080/TCP   13m
+NAME                           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/csi-rbdplugin   2         2         2       2            2           <none>          2m22s
 
-NAME                                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-daemonset.apps/ceph-csi-cephfs-nodeplugin   2         2         2       2            2           <none>          13m
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/csi-rbdplugin-provisioner   2/3     3            2           2m22s
 
-NAME                                          READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/ceph-csi-cephfs-provisioner   2/3     3            2           13m
-
-NAME                                                    DESIRED   CURRENT   READY   AGE
-replicaset.apps/ceph-csi-cephfs-provisioner-bff7587bd   3         3         2       13m
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/csi-rbdplugin-provisioner-74c5fc75db   3         3         2       2m22s
 ```
 
 ### C) StorageClass Configuration and Deployment 
@@ -385,7 +385,7 @@ metadata:
    name: csi-rbd-sc
 provisioner: rbd.csi.ceph.com
 parameters:
-   clusterID: 233a71ec-7b10-11ee-a5c8-f76cb62122db 
+   clusterID: e6816ea6-d91c-40c4-b5e7-e6d27729e400
    pool: kubernetes
    imageFeatures: layering
    csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret
@@ -449,14 +449,16 @@ kubectl apply -f pvc.yaml
 
 ```bash
 $ kubectl get sc,pvc,pv
-NAME                                    PROVISIONER           RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-storageclass.storage.k8s.io/csi-fs-sc   cephfs.csi.ceph.com   Delete          Immediate           true                   11m
+NAME                                     PROVISIONER        RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+storageclass.storage.k8s.io/csi-rbd-sc   rbd.csi.ceph.com   Delete          Immediate           true                   7m13s
 
-NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-persistentvolumeclaim/csi-cephfs-pvc   Bound    pvc-ca243a24-4fdd-41f9-b4f5-9c882cef250a   1Gi        RWX            csi-fs-sc      <unset>                 11m
+NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/raw-block-pvc   Bound    pvc-a7a3728e-fd22-433b-8245-49be121cb24b   1Gi        RWO            csi-rbd-sc     <unset>                 7m3s
+persistentvolumeclaim/rbd-pvc         Bound    pvc-9d2deabf-5301-4af1-afb5-4ac3215b4f6b   1Gi        RWO            csi-rbd-sc     <unset>                 6s
 
-NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
-persistentvolume/pvc-ca243a24-4fdd-41f9-b4f5-9c882cef250a   1Gi        RWX            Delete           Bound    default/csi-cephfs-pvc   csi-fs-sc      <unset>                          11m
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+persistentvolume/pvc-9d2deabf-5301-4af1-afb5-4ac3215b4f6b   1Gi        RWO            Delete           Bound    default/rbd-pvc         csi-rbd-sc     <unset>                          6s
+persistentvolume/pvc-a7a3728e-fd22-433b-8245-49be121cb24b   1Gi        RWO            Delete           Bound    default/raw-block-pvc   csi-rbd-sc     <unset>                          7m3s
 ```
 
 ```bash
@@ -512,17 +514,27 @@ kubectl apply -f pod.yaml
 
 ```bash
 $ kubectl get pod,pvc,pv
-NAME                              READY   STATUS    RESTARTS   AGE
-pod/csi-cephfs-demo-pod           1/1     Running   0          75s
+NAME                                             READY   STATUS    RESTARTS   AGE
+pod/csi-rbd-demo-pod                             1/1     Running   0          30s
+pod/csi-rbdplugin-bl26x                          3/3     Running   0          8m54s
+pod/csi-rbdplugin-provisioner-74c5fc75db-pzl58   7/7     Running   0          8m55s
+pod/csi-rbdplugin-provisioner-74c5fc75db-q6pjn   0/7     Pending   0          8m55s
+pod/csi-rbdplugin-provisioner-74c5fc75db-x5qdl   7/7     Running   0          8m55s
+pod/csi-rbdplugin-ptjjv                          3/3     Running   0          8m54s
+pod/pod-with-raw-block-volume                    1/1     Running   0          115s
 
-NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-persistentvolumeclaim/csi-cephfs-pvc   Bound    pvc-675e6e84-e78a-4d74-bea1-6908509fbe3c   1Gi        RWX            csi-fs-sc      <unset>                 2m59s
+NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/raw-block-pvc   Bound    pvc-a7a3728e-fd22-433b-8245-49be121cb24b   1Gi        RWO            csi-rbd-sc     <unset>                 8m4s
+persistentvolumeclaim/rbd-pvc         Bound    pvc-9d2deabf-5301-4af1-afb5-4ac3215b4f6b   1Gi        RWO            csi-rbd-sc     <unset>                 67s
 
-NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
-persistentvolume/pvc-675e6e84-e78a-4d74-bea1-6908509fbe3c   1Gi        RWX            Delete           Bound    default/csi-cephfs-pvc   csi-fs-sc      <unset>                          2m59s
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+persistentvolume/pvc-9d2deabf-5301-4af1-afb5-4ac3215b4f6b   1Gi        RWO            Delete           Bound    default/rbd-pvc         csi-rbd-sc     <unset>                          67s
+persistentvolume/pvc-a7a3728e-fd22-433b-8245-49be121cb24b   1Gi        RWO            Delete           Bound    default/raw-block-pvc   csi-rbd-sc     <unset>                          8m4s
 
+$ kubectl exec pod-with-raw-block-volume -- lsblk | grep rbd0
+rbd0   251:0    0    1G  0 disk
 
-$ kubectl exec csi-cephfs-demo-pod -- df /var/lib/www
+$ kubectl exec csi-rbd-demo-pod -- df /var/lib/www/html
 Filesystem     1K-blocks  Used Available Use% Mounted on
-ceph-fuse        1048576     0   1048576   0% /var/lib/www
+/dev/rbd0         996780    24    980372   1% /var/lib/www/html
 ```
