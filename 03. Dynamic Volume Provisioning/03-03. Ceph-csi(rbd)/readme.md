@@ -17,7 +17,7 @@ or
             |                            |                            |
             |192.168.219.51              |192.168.219.52              |192.168.219.53
 +-----------+-----------+    +-----------+-----------+    +-----------+-----------+
-|        [node01]       |    |        [node01]       |    |        [node01]       |
+|        [node01]       |    |        [node02]       |    |        [node03]       |
 |     Object Storage    +----+     Object Storage    +----+     Object Storage    |
 |     Monitor Daemon    |    |                       |    |                       |
 |     Manager Daemon    |    |                       |    |                       |
@@ -30,7 +30,7 @@ or
 
 <BR>
 
-### A) Ceph : Configure Cluster #1
+### A) Ceph : Configure Cluster #1 - node01
 
 ```bash
 # Generate SSH key-pair on [Monitor Daemon] Node (call it Admin Node on here) and set it to each Node.
@@ -154,7 +154,7 @@ $ ceph -s
 
 <BR>
 
-### B) Ceph : Configure Cluster #2
+### B) Ceph : Configure Cluster #2 - node01
 
 ```bash
 # Configure OSD (Object Storage Device) to each Node from Admin Node.
