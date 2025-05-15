@@ -192,3 +192,11 @@ $ kubectl exec -it wordpress-mysql-67d99b6d47-l2z2f -- df /var/lib/mysql
 Filesystem     1K-blocks   Used Available Use% Mounted on
 /dev/rbd0       20466256 118384  20331488   1% /var/lib/mysql
 ```
+
+<br>
+
+# 2. Ceph Dashboard
+
+- [Prometheus Install](https://rook.io/docs/rook/latest-release/Storage-Configuration/Monitoring/ceph-monitoring/)
+- [Dashboard Install](https://rook.io/docs/rook/latest-release/Storage-Configuration/Monitoring/ceph-dashboard/)
+
