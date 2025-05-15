@@ -43,7 +43,7 @@ sda
 ├─sda1
 ├─sda2 ext4   1.0         3c586df5-01e3-4d9b-a728-24fc64ec26e6  810.2M    10% /boot
 └─sda3 ext4   1.0         9b12b673-598d-48a1-b93a-b2acd64c2afc   13.1G    24% /
-sdb ## <- There should be a storage device like this "vdb" with no configurations set.
+sdb ## <- There should be a storage device like this "sdb" with no configurations set.
 ```
 
 <BR>
