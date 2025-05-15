@@ -73,7 +73,13 @@ Select only one and install it.
   * *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
 
-### 4. (Optional) Dynamic Volume Provisioning
+### 4. (Optional) Load Balancing with MetalLB
+Set up a LoadBalancer for bare-metal clusters using MetalLB.
+
+* [**Installing MetalLB**]()
+
+
+### 5. (Optional) Dynamic Volume Provisioning
 
 Select only one and install it.
 
