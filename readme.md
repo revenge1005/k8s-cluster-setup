@@ -83,4 +83,4 @@ Select only one and install it.
 
 * [**Ceph-csi (RBD)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-03.%20Ceph-csi(rbd))
 
-* [**Rook ceph**]()
+* [**Rook ceph**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-04.%20rook_ceph)
