@@ -34,7 +34,7 @@ or
 
 <BR>
 
-### A) 모든 worker node에 Raw device를 추가 장착 확인 (k8s-worker01, k8s-worker02, k8s-worker03)
+### A) Verify that a Raw Device is Added to All Worker Nodes (k8s-worker01, k8s-worker02, k8s-worker03)
 
 ```bash
 $ lsblk -f
@@ -42,44 +42,44 @@ $ lsblk -f
 
 <BR>
 
-### B) Rook을 활용해서 kubernetes에 ceph cluster 구축
+### B) Deploy a Ceph Cluster on Kubernetes Using Rook
 
-- [Rook 공식 Github](https://github.com/rook/rook?tab=readme-ov-file)
+- [Rook Github](https://github.com/rook/rook?tab=readme-ov-file)
 - [Rook Quickstart Documentation](https://rook.github.io/docs/rook/latest-release/Getting-Started/quickstart/)
 
 ```bash
-# GitHub에서 Rook operator를 내려 받는다.
+# Download the Rook operator from GitHub.
 git clone --single-branch --branch v1.17.2 https://github.com/rook/rook.git
  
 cd rook/deploy/examples 
 ```
 
 ```bash
-# Rook operator 운영에 필요한 custom resource definition을 생성하고 Rook operator 리소스를 kubernetes cluster에 배포한다.
+# Create the custom resource definitions required for Rook operator and deploy Rook operator resources to the Kubernetes cluster.
 kubectl create -f crds.yaml -f common.yaml -f operator.yaml
 ```
 
 ```bash
-# rook-ceph-operator pod가 running 상태인지 확인
+# Verify that the rook-ceph-operator pod is in a running state.
 kubectl -n rook-ceph get pod
 ```
 
 ```bash
-# Ceph cluster를 생성
+# Create the Ceph cluster.
 kubectl create -f cluster.yaml
 ```
 
 ```bash
-# Ceph 관련 pod가 running 상태인지 확인
+# Verify that Ceph-related pods are in a running state.
 kubectl -n rook-ceph get pod
 ```
 
 ```bash
-# Rook toolbox를 설치
+# Install the Rook toolbox.
 kubectl create -f deploy/examples/toolbox.yaml
 ```
 
 ```bash
-# Rook toolbox pod 내부에서 `ceph status` 명령을 수행하여 ceph cluster 상태를 조회
+# Execute the `ceph status` command inside the Rook toolbox pod to check the Ceph cluster status.
 kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- bash
 ```
