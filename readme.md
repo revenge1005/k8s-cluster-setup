@@ -76,7 +76,7 @@ Select only one and install it.
 ### 4. (Optional) Load Balancing with MetalLB
 Set up a LoadBalancer for bare-metal clusters using MetalLB.
 
-* [**Installing MetalLB**]()
+* [**Installing MetalLB**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20MetalLB)
 
 
 ### 5. (Optional) Dynamic Volume Provisioning

@@ -12,6 +12,8 @@ or
 
 - [MetalLB](https://metallb.universe.tf/installation/)
 
+<br>
+
 ### A) strict ARP mode 활성화
 
 ```bash
@@ -25,6 +27,8 @@ mode: "ipvs"
 ipvs:
   strictARP: true  # <- false에서 true로 변경
 ```
+
+<br>
 
 ### B) Installation by manifest
 
@@ -53,6 +57,8 @@ deployment.apps/controller   1/1     1            1           2m42s
 NAME                                   DESIRED   CURRENT   READY   AGE
 replicaset.apps/controller-bb5f47665   1         1         1       2m42s
 ```
+
+<br>
 
 ### C) IP Address Pool + L2Advertisement configuration
 
@@ -91,6 +97,8 @@ EOF
 
 kubectl apply -f my-network.yaml
 ```
+
+<br>
 
 ### D) Check the operation of 'Metal LB'
 
@@ -143,5 +151,6 @@ service/almighty          LoadBalancer   10.106.91.31   192.168.219.190   8080:3
 service/kubernetes        ClusterIP      10.96.0.1      <none>            443/TCP                         109m    <none>
 ```
 
-![metallb-01]()
-![metallb-02]()
+![metallb-01](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20MetalLB/metallb-01.PNG)
+
+![metallb-02](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20MetalLB/metallb-02.PNG)
