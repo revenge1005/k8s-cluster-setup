@@ -77,10 +77,10 @@ Select only one and install it.
 
 Select only one and install it.
 
-* [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-01.%20NFS)
+* [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20Dynamic%20Volume%20Provisioning/04-01.%20NFS)
 
-* [**Ceph-csi (Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-02.%20Ceph-csi(cephfs))
+* [**Ceph-csi (Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20Dynamic%20Volume%20Provisioning/04-02.%20Ceph-csi(cephfs))
 
-* [**Ceph-csi (RBD)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-03.%20Ceph-csi(rbd))
+* [**Ceph-csi (RBD)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20Dynamic%20Volume%20Provisioning/04-03.%20Ceph-csi(rbd))
 
-* [**Rook ceph**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Dynamic%20Volume%20Provisioning/03-04.%20rook_ceph)
+* [**Rook ceph**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20Dynamic%20Volume%20Provisioning/04-04.%20rook_ceph)
