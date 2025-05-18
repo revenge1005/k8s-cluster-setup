@@ -78,9 +78,9 @@ Select only one and install it.
 
 * [**Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-2.%20Enable%20Dashboard)
 
-* [**Add Control Plane Node**]()
+* [**Add Control Plane Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-3.%20Add%20Control%20Plane%20Node)
 
-* [**Add Worker Node**]()
+* [**Add Worker Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-4.%20Add%20Worker%20Node)
 
 
 ### 5. (Optional) Load Balancing with MetalLB
