@@ -72,14 +72,24 @@ Select only one and install it.
 * [**Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
   * *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
+### 4. (Optional) Configure Manager Node / Dashboard / Add Control Plane, Worker Node
 
-### 4. (Optional) Load Balancing with MetalLB
+* [**Configure Manager Node**]()
+
+* [**Dashboard**]()
+
+* [**Add Control Plane Node**]()
+
+* [**Add Worker Node**]()
+
+
+### 5. (Optional) Load Balancing with MetalLB
 Set up a LoadBalancer for bare-metal clusters using MetalLB.
 
 * [**Installing MetalLB**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20MetalLB)
 
 
-### 5. (Optional) Dynamic Volume Provisioning
+### 6. (Optional) Dynamic Volume Provisioning
 
 Select only one and install it.
 
