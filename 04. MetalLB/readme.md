@@ -8,7 +8,7 @@ or
 
 <br>
 
-# 2. Installing MetalLB 
+# 1. Installing MetalLB 
 
 - [MetalLB](https://metallb.universe.tf/installation/)
 

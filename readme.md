@@ -76,7 +76,7 @@ Select only one and install it.
 
 * [**Configure Manager Node**]()
 
-* [**Dashboard**]()
+* [**Enable Dashboard**]()
 
 * [**Add Control Plane Node**]()
 
