@@ -76,7 +76,7 @@ Select only one and install it.
 
 * [**Configure Manager Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-1.%20Configure%20Manager%20Node)
 
-* [**Enable Dashboard**]()
+* [**Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-2.%20Enable%20Dashboard)
 
 * [**Add Control Plane Node**]()
 
