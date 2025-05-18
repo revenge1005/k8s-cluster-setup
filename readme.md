@@ -74,7 +74,7 @@ Select only one and install it.
 
 ### 4. (Optional) Configure Manager Node / Dashboard / Add Control Plane, Worker Node
 
-* [**Configure Manager Node**]()
+* [**Configure Manager Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-1.%20Configure%20Manager%20Node)
 
 * [**Enable Dashboard**]()
 
