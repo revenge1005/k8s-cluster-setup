@@ -1,4 +1,4 @@
-# 01. Installing a container runtime (containerd) : All Nodes
+# 01. Installing a container runtime (containerd) : k8s-master, k8s-worker01, k8s-worker02 node
 
 ```bash
 apt -y install containerd
@@ -19,7 +19,7 @@ systemctl restart containerd.service
 
 <BR>
 
-# 02. Installing kubeadm : ALL Node
+# 02. Installing kubeadm : k8s-master, k8s-worker01, k8s-worker02 node
 
 ### A) Installing kubeadm, kubelet and kubectl
 

@@ -1,4 +1,4 @@
-# 01. Installing a container runtime (Docker Engine) : All Nodes 
+# 01. Installing a container runtime (Docker Engine) : k8s-master, k8s-worker01, k8s-worker02 node
 
 ### A) Set up Docker's apt repository.
  
@@ -45,7 +45,7 @@ ls -l  /var/run/cri-dockerd.sock
 
 <BR>
 
-# 02. Installing kubeadm : ALL Node
+# 02. Installing kubeadm : k8s-master, k8s-worker01, k8s-worker02 node
 
 ### A) Installing kubeadm, kubelet and kubectl
 
