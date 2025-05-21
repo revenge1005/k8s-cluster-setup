@@ -59,6 +59,11 @@ kubeadm init --control-plane-endpoint=192.168.219.25 \
 	--apiserver-advertise-address=192.168.219.100 \
 	--pod-network-cidr=192.168.0.0/16 \
 	--cri-socket=unix:///run/containerd/containerd.sock
+
+
+# Save the results of the execution of the kubeadm init command (kubeadm join command) separately.
+kubeadm join 192.168.219.25:6443 --token 2whvdj...qbbib \
+  --discovery-token-ca-cert-hash sha256:7125...78570b57 
 ```
 
 ```bash
@@ -74,11 +79,6 @@ scp /etc/kubernetes/admin.conf root@192.168.219.25:/tmp
 mkdir -p $HOME/.kube
 mv /tmp/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
-
-
-# Save the results of the execution of the kubeadm init command (kubeadm join command) separately.
-kubeadm join 192.168.219.25:6443 --token 2whvdj...qbbib \
-  --discovery-token-ca-cert-hash sha256:7125...78570b57 
 ```
 
 ```bash
