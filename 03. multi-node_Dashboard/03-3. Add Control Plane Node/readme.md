@@ -6,21 +6,7 @@
 
 # 1. Add Control Plane Node
 
-```
-+----------------------+   +----------------------+
-|   [ k8s-master-1 ]   |   |   [ k8s-master-2 ]   |
-|     Control Plane    |   |     Control Plane    |
-+-----------+----------+   +-----------+----------+
-        eth0|192.168.219.100        eth0|192.168.219.101
-            |                          |
-------------+--------------------------+-----------
-            |                          |
-        eth0|192.168.219.110       eth0|192.168.219.120
-+-----------+----------+   +-----------+----------+
-|   [ k8s-worker01 ]   |   |   [ k8s-worker02 ]   |
-|     Worker Node#1    |   |     Worker Node#2    |
-+----------------------+   +----------------------+
-```
+![multi-node](https://github.com/revenge1005/k8s-cluster-setup/blob/main/multi-node-configuration.png)
 
 <BR>
 

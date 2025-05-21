@@ -1,10 +1,16 @@
 # 0. 선행 작업
 
-- [1. Installing Kubernetes with Docker Engine Runtime](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
+- [Installing Kubernetes with Docker Engine Runtime](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
+
+or 
+
+- [Manager(Proxy,kubectl) Node](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-1.%20Configure%20Manager%20Node)
 
 <br>
 
 # 01. Add Worker Nodes
+
+![multi-node](https://github.com/revenge1005/k8s-cluster-setup/blob/main/multi-node-configuration.png)
 
 <BR>
 
