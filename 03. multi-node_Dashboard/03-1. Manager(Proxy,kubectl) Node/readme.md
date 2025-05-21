@@ -6,7 +6,7 @@
 
 <BR>
 
-# 1. Configure Manager Node
+# 1. Configure Manager(Proxy,kubectl) Node
 
 ![multi-node](https://github.com/revenge1005/k8s-cluster-setup/blob/main/multi-node-configuration.png)
 
@@ -74,6 +74,12 @@ scp /etc/kubernetes/admin.conf root@192.168.219.25:/tmp
 mkdir -p $HOME/.kube
 mv /tmp/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+# Save the results of the execution of the kubeadm init command (kubeadm join command) separately.
+kubeadm join 192.168.219.25:6443 --token 2whvdj...qbbib \
+  --discovery-token-ca-cert-hash sha256:7125...78570b57 \
+  --cri-socket=unix:///run/containerd/containerd.sock
 ```
 
 ```bash
@@ -84,4 +90,4 @@ k8s-master   NotReady   control-plane   60s   v1.32.4   192.168.219.100   <none>
 
 ### E) Start the next step.
 
-- [3-B. Initializing your control-plane node](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd#03-creating-a-cluster-with-kubeadm)
+- [3-B. Installing a Pod network add-on - k8s-master](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd#b-installing-a-pod-network-add-on---k8s-master)
