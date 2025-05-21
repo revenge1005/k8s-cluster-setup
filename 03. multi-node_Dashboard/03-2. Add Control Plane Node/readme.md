@@ -10,7 +10,25 @@
 
 <BR>
 
-### A) Confirm join command on existing Control Plane Node and also transfer certificate files to new Node with any user.
+### A) Add proxy setting for new Control Plane on Manager Node.
+
+```bash
+$ vi /etc/nginx/nginx.conf
+
+# add new Control Plane
+stream {
+    upstream k8s-api {
+        server 192.168.219.100:6443;
+        server 192.168.219.101:6443; # add
+    }
+    server {
+        listen 6443;
+        proxy_pass k8s-api;
+    }
+}
+```
+
+### B) Confirm join command on existing Control Plane Node and also transfer certificate files to new Node with any user.
 
 ```bash
 # k8s-master01 node
@@ -31,7 +49,7 @@ kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b --discovery-to
 
 <BR>
 
-### B) Run join command you confirmed on a new Node with [--control-plane] option.
+### C) Run join command you confirmed on a new Node with [--control-plane] option.
 
 ```bash
 # k8s-master02 node
@@ -41,13 +59,12 @@ $ mkdir /etc/kubernetes/pki
 $ tar zxvf /tmp/kube-certs.tar.gz -C /etc/kubernetes/pki
 $ kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b \
         --discovery-token-ca-cert-hash sha256:058acc0a08802cd8d7aefeb0699ba8d8d66aeb79269278e31653e1af8998ef3e \
-        --cri-socket unix:///var/run/cri-dockerd.sock \
         --control-plane
 ```
 
 <BR>
 
-### C) Verify settings on Manager Node. That's OK if the status of new Node turns to [STATUS = Ready].
+### D) Verify settings on Manager Node. That's OK if the status of new Node turns to [STATUS = Ready].
 
 ```bash
 $ kubectl get nodes
