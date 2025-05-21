@@ -72,15 +72,15 @@ Select only one and install it.
 * [**Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
   * *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
 
-### 4. (Optional) Configure Manager Node / Dashboard / Add Control Plane, Worker Node
+### 4. (Optional) K8s Multi Node / Dashboard
 
-* [**Configure Manager Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-1.%20Configure%20Manager%20Node)
+* [**A) Configure Manager Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-1.%20Configure%20Manager%20Node)
 
-* [**Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-2.%20Enable%20Dashboard)
+* [**B) Add Control Plane Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-3.%20Add%20Control%20Plane%20Node)
 
-* [**Add Control Plane Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-3.%20Add%20Control%20Plane%20Node)
+* [**C) Add Worker Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-4.%20Add%20Worker%20Node)
 
-* [**Add Worker Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-4.%20Add%20Worker%20Node)
+* [**D) Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-2.%20Enable%20Dashboard)
 
 
 ### 5. (Optional) Load Balancing with MetalLB
