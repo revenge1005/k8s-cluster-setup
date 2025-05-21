@@ -27,8 +27,7 @@ kubeadm join 10.0.0.25:6443 --token pqsfr3.5zt0ffe08xi1iz4x --discovery-token-ca
 
 ```bash
 kubeadm join 192.168.219.100:6443 --token pqsfr3.5zt0ffe08xi1iz4x \
-        --discovery-token-ca-cert-hash sha256:9cb21e3807780e1acf9ad9b6369ce54b1141ecf007d099675b23b6c3368494c9 \
-        --cri-socket unix:///var/run/cri-dockerd.sock 
+        --discovery-token-ca-cert-hash sha256:9cb21e3807780e1acf9ad9b6369ce54b1141ecf007d099675b23b6c3368494c9 
 ```
 
 <BR>
