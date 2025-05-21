@@ -13,7 +13,7 @@
 ### A) Confirm join command on existing Control Plane Node and also transfer certificate files to new Node with any user.
 
 ```bash
-# k8s-master-1 node
+# k8s-master01 node
 
 {
     cd /etc/kubernetes/pki
@@ -23,7 +23,7 @@
 ```
 
 ```bash
-# k8s-master-1 node
+# k8s-master01 node
 
 $ kubeadm token create --print-join-command
 kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b --discovery-token-ca-cert-hash sha256:058acc0a08802cd8d7aefeb0699ba8d8d66aeb79269278e31653e1af8998ef3e
@@ -34,7 +34,7 @@ kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b --discovery-to
 ### B) Run join command you confirmed on a new Node with [--control-plane] option.
 
 ```bash
-# k8s-master-2 node
+# k8s-master02 node
 
 # copy certificates transferred from existing Control Plane
 $ mkdir /etc/kubernetes/pki

@@ -17,7 +17,8 @@ or
 ### A) Confirm join command on Control Plane Node.
 
 ```bash
-kubeadm token create --print-join-command
+$ kubeadm token create --print-join-command
+kubeadm join 10.0.0.25:6443 --token pqsfr3.5zt0ffe08xi1iz4x --discovery-token-ca-cert-hash sha256:9cb21e3807780e1acf9ad9b6369ce54b1141ecf007d099675b23b6c3368494c9
 ```
 
 <BR>
@@ -25,8 +26,8 @@ kubeadm token create --print-join-command
 ### B) Run join command on a new Node.
 
 ```bash
-kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b \
-        --discovery-token-ca-cert-hash sha256:058acc0a08802cd8d7aefeb0699ba8d8d66aeb79269278e31653e1af8998ef3e \
+kubeadm join 192.168.219.100:6443 --token pqsfr3.5zt0ffe08xi1iz4x \
+        --discovery-token-ca-cert-hash sha256:9cb21e3807780e1acf9ad9b6369ce54b1141ecf007d099675b23b6c3368494c9 \
         --cri-socket unix:///var/run/cri-dockerd.sock 
 ```
 
