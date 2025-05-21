@@ -69,8 +69,8 @@ $ kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b \
 ```bash
 $ kubectl get nodes
 NAME           STATUS   ROLES           AGE   VERSION
-k8s-master-1   Ready    control-plane   57m   v1.32.4
-k8s-master-2   Ready    control-plane   10s   v1.32.4
+k8s-master01   Ready    control-plane   57m   v1.32.4
+k8s-master02   Ready    control-plane   10s   v1.32.4
 k8s-worker01   Ready    <none>          55m   v1.32.4
 k8s-worker02   Ready    <none>          55m   v1.32.4
 ```
