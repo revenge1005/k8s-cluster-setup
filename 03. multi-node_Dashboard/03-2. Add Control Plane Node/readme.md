@@ -44,7 +44,7 @@ stream {
 # k8s-master01 node
 
 $ kubeadm token create --print-join-command
-kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b --discovery-token-ca-cert-hash sha256:058acc0a08802cd8d7aefeb0699ba8d8d66aeb79269278e31653e1af8998ef3e
+kubeadm join 192.168.219.25:6443 --token 2jpwgc.29aq5nysp5pksicl --discovery-token-ca-cert-hash sha256:b94c81c60dcb7efa767a4e0650eb563062562afa6e394d303130fecd67f52612
 ```
 
 <BR>
@@ -57,9 +57,9 @@ kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b --discovery-to
 # copy certificates transferred from existing Control Plane
 $ mkdir /etc/kubernetes/pki
 $ tar zxvf /tmp/kube-certs.tar.gz -C /etc/kubernetes/pki
-$ kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b \
-        --discovery-token-ca-cert-hash sha256:058acc0a08802cd8d7aefeb0699ba8d8d66aeb79269278e31653e1af8998ef3e \
-        --control-plane
+$ kubeadm join 192.168.219.25:6443 --token 2jpwgc.29aq5nysp5pksicl \
+    --discovery-token-ca-cert-hash sha256:b94c81c60dcb7efa767a4e0650eb563062562afa6e394d303130fecd67f52612 \
+    --control-plane
 ```
 
 <BR>
