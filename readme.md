@@ -74,13 +74,13 @@ Select only one and install it.
 
 ### 4. (Optional) K8s Multi Node / Dashboard
 
-* [**A) Manager(Proxy,kubectl) Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-1.%20Configure%20Manager%20Node)
+* [**A) Manager(Proxy,kubectl) Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-1.%20Manager(Proxy%2Ckubectl)%20Node)
 
-* [**B) Add Control Plane Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-3.%20Add%20Control%20Plane%20Node)
+* [**B) Add Control Plane Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-2.%20Add%20Control%20Plane%20Node)
 
-* [**C) Add Worker Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-4.%20Add%20Worker%20Node)
+* [**C) Add Worker Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-3.%20Add%20Worker%20Node)
 
-* [**D) Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-2.%20Enable%20Dashboard)
+* [**D) Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-4.%20Enable%20Dashboard)
 
 
 ### 5. (Optional) Load Balancing with MetalLB
