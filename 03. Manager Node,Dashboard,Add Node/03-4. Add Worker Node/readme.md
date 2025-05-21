@@ -26,7 +26,7 @@ kubeadm join 192.168.219.100:6443 --token nt5o96.s895kkb775ywed3b \
 
 <BR>
 
-### C)
+### C) Verify settings on Manager Node. That's OK if the status of new Node turns to [STATUS = Ready].
 
 ```bash
 $ kubectl get nodes
