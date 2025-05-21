@@ -78,8 +78,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 # Save the results of the execution of the kubeadm init command (kubeadm join command) separately.
 kubeadm join 192.168.219.25:6443 --token 2whvdj...qbbib \
-  --discovery-token-ca-cert-hash sha256:7125...78570b57 \
-  --cri-socket=unix:///run/containerd/containerd.sock
+  --discovery-token-ca-cert-hash sha256:7125...78570b57 
 ```
 
 ```bash

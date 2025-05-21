@@ -96,8 +96,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 # Save the results of the execution of the kubeadm init command (kubeadm join command) separately.
 kubeadm join 192.168.219.100:6443 --token 2whvdj...qbbib \
-  --discovery-token-ca-cert-hash sha256:7125...78570b57 \
-  --cri-socket unix:///var/run/cri-dockerd.sock 
+  --discovery-token-ca-cert-hash sha256:7125...78570b57 
 ```
 
 ### B) Installing a Pod network add-on
@@ -114,9 +113,10 @@ watch -n 3 kubectl get nodes
 # 04. Joining nodes - worker01, worker02
 
 ```bash
+# Add to the execution result of the saved kubeadminit command (kubeadm join command) as follows.
 kubeadm join 192.168.219.100:6443 --token 2whv...bbib \
   --discovery-token-ca-cert-hash sha256:712538d8a5a...6a5078570b57 \
-  --cri-socket unix:///var/run/cri-dockerd.sock
+  --cri-socket=unix:///run/containerd/containerd.sock # <-add
 ```
 
 <BR>
