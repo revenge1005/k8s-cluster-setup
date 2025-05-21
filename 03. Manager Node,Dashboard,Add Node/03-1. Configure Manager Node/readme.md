@@ -8,21 +8,7 @@
 
 # 1. Configure Manager Node
 
-```
-+----------------------+   +----------------------+
-|     [ k8s-mgs ]      |   |     [ k8s-master ]   |
-|     Manager Node     |   |     Control Plane    |
-+-----------+----------+   +-----------+----------+
-        eth0|192.168.219.25        eth0|192.168.219.100
-            |                          |
-------------+--------------------------+-----------
-            |                          |
-        eth0|192.168.219.110       eth0|192.168.219.120
-+-----------+----------+   +-----------+----------+
-|   [ k8s-worker01 ]   |   |   [ k8s-worker02 ]   |
-|     Worker Node#1    |   |     Worker Node#2    |
-+----------------------+   +----------------------+
-```
+![multi-node](https://github.com/revenge1005/k8s-cluster-setup/blob/main/multi-node-configuration.png)
 
 <BR>
 
