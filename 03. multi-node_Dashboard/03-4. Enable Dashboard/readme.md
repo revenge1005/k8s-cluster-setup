@@ -85,6 +85,6 @@ Forwarding from 0.0.0.0:8443 -> 8443
 
 - `https://(Control-plan Node IP address):8443/`
 
-![03-2-1](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-2.%20Enable%20Dashboard/03-2-1.PNG)
+![03-2-1](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20multi-node_Dashboard/03-4.%20Enable%20Dashboard/03-2-1.PNG)
 
-![03-2-2](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20Manager%20Node%2CDashboard%2CAdd%20Node/03-2.%20Enable%20Dashboard/03-2-2.PNG)
+![03-2-2](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20multi-node_Dashboard/03-4.%20Enable%20Dashboard/03-2-2.PNG)
