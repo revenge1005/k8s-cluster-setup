@@ -10,7 +10,7 @@ or
 
 # 1. Installing MetalLB 
 
-- [MetalLB](https://metallb.universe.tf/installation/)
+- https://metallb.universe.tf/installation/
 
 <br>
 
