@@ -4,9 +4,6 @@ Kubernetes Cluster Setup Guide.
 
 ![node_info.drawio](https://github.com/revenge1005/k8s-cluster-setup/blob/main/node_info.drawio.png)
 
-![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
-
-
 ## Installation and Running
 
 ### 1. 설치 환경
@@ -74,6 +71,8 @@ Select only one and install it.
 
 ### 4. (Optional) K8s Multi Node / Dashboard
 
+![multi-node](https://github.com/revenge1005/k8s-cluster-setup/blob/main/multi-node-configuration.png)
+
 * [**A) Manager(Proxy,kubectl) Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-1.%20Manager(Proxy%2Ckubectl)%20Node)
 
 * [**B) Add Control Plane Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-2.%20Add%20Control%20Plane%20Node)
@@ -92,6 +91,8 @@ Set up a LoadBalancer for bare-metal clusters using MetalLB.
 ### 6. (Optional) Dynamic Volume Provisioning
 
 Select only one and install it.
+
+![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
 
 * [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-01.%20NFS)
 
