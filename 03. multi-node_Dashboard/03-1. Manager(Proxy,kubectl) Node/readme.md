@@ -59,11 +59,6 @@ kubeadm init --control-plane-endpoint=192.168.219.25 \
 	--apiserver-advertise-address=192.168.219.100 \
 	--pod-network-cidr=192.168.0.0/16 \
 	--cri-socket=unix:///run/containerd/containerd.sock
-
-
-# Save the results of the execution of the kubeadm init command (kubeadm join command) separately.
-kubeadm join 192.168.219.25:6443 --token 2whvdj...qbbib \
-  --discovery-token-ca-cert-hash sha256:7125...78570b57 
 ```
 
 ```bash
@@ -87,6 +82,39 @@ NAME         STATUS     ROLES           AGE   VERSION   INTERNAL-IP       EXTERN
 k8s-master   NotReady   control-plane   60s   v1.32.4   192.168.219.100   <none>        Ubuntu 24.04.2 LTS   6.8.0-60-generic   containerd://1.7.24
 ```
 
-### E) Start the next step.
+### E) Installing a Pod network add-on - k8s-mgs
 
-- [3-B. Installing a Pod network add-on - k8s-master](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd#b-installing-a-pod-network-add-on---k8s-master)
+```bash
+{
+    kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+    watch -n 3 kubectl get nodes
+}
+```
+
+### F) Set kubectl command autocomplete - k8s-mgs
+
+```bash
+{
+    source <(kubectl completion bash)
+    echo "source <(kubectl completion bash)" >> ~/.bashrc
+}
+```
+
+### G) Install "etcd" : install ectcd on the control-plane - k8s-master
+
+```bash
+export RELEASE=$(curl -s https://api.github.com/repos/etcd-io/etcd/releases/latest|grep tag_name | cut -d '"' -f 4)
+wget https://github.com/etcd-io/etcd/releases/download/${RELEASE}/etcd-${RELEASE}-linux-amd64.tar.gz
+tar xf etcd-${RELEASE}-linux-amd64.tar.gz
+cd etcd-${RELEASE}-linux-amd64
+mv etcd etcdctl etcdutl /usr/local/bin
+
+
+etcd --version
+```
+
+### H) Start the next step.
+
+- [03-2. Add Control Plane Node](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-2.%20Add%20Control%20Plane%20Node)
+
+- [03-3. Add Worker Node](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-3.%20Add%20Worker%20Node)
