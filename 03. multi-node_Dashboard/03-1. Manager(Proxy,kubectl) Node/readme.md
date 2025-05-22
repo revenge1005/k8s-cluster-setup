@@ -82,7 +82,7 @@ NAME         STATUS     ROLES           AGE   VERSION   INTERNAL-IP       EXTERN
 k8s-master   NotReady   control-plane   60s   v1.32.4   192.168.219.100   <none>        Ubuntu 24.04.2 LTS   6.8.0-60-generic   containerd://1.7.24
 ```
 
-### E) Installing a Pod network add-on - k8s-mgs
+### E) Installing a Pod network add-on : k8s-mgs
 
 ```bash
 {
@@ -91,7 +91,7 @@ k8s-master   NotReady   control-plane   60s   v1.32.4   192.168.219.100   <none>
 }
 ```
 
-### F) Set kubectl command autocomplete - k8s-mgs
+### F) Set kubectl command autocomplete : k8s-mgs
 
 ```bash
 {
