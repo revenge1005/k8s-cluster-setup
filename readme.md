@@ -69,8 +69,6 @@ Select only one and install it.
 
 ### 4. (Optional) K8s Multi Node / Dashboard
 
-![multi-node](https://github.com/revenge1005/k8s-cluster-setup/blob/main/multi-node-configuration.png)
-
 * [**A) Manager(Proxy,kubectl) Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-1.%20Manager(Proxy%2Ckubectl)%20Node)
 
 * [**B) Add Control Plane Node**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-2.%20Add%20Control%20Plane%20Node)
