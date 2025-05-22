@@ -1,8 +1,8 @@
 # 0. 선행 작업
 
-- [1. Installing a container runtime (containerd)](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd#01-installing-a-container-runtime-containerd--all-nodes)
+- [02-1. Installing a container runtime (containerd) : k8s-master, k8s-worker01, k8s-worker02 node](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd#01-installing-a-container-runtime-containerd--all-nodes)
 
-- [2. Installing kubeadm](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd#02-installing-kubeadm--all-node)
+- [02-2. Installing kubeadm : k8s-master, k8s-worker01, k8s-worker02 node](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd#02-installing-kubeadm--all-node)
 
 <BR>
 
