@@ -24,6 +24,10 @@ or
 +-----------------------+    +-----------------------+    +-----------------------+
 ```
 
+- **k8s Architecture + Dynamic Volume Provisioning Process**
+
+![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
+
 - **ceph node setting:**
 
 ![ceph_cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/05.%20Dynamic%20Volume%20Provisioning/05-03.%20Ceph-csi(rbd)/ceph_cpu_memory.PNG)

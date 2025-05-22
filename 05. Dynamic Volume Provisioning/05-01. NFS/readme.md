@@ -10,6 +10,7 @@ or
 
 # 1. Kubernetes : Dynamic Volume Provisioning (NFS)
 
+- k8s cluster + NFS Server
 
 ```
 +----------------------+   +----------------------+
@@ -27,6 +28,10 @@ or
 |     Worker Node#1    |   |     Worker Node#2    |
 +----------------------+   +----------------------+
 ```
+
+- **k8s Architecture + Dynamic Volume Provisioning Process**
+
+![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
 
 ### A) Configure NFS Server.
 

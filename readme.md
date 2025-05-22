@@ -92,8 +92,6 @@ Set up a LoadBalancer for bare-metal clusters using MetalLB.
 
 Select only one and install it.
 
-![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
-
 * [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-01.%20NFS)
 
 * [**Ceph-csi (Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-02.%20Ceph-csi(cephfs))

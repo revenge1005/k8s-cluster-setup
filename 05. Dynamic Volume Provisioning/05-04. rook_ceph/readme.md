@@ -28,6 +28,10 @@ or
 +-----------+----------+   +-----------+----------+
 ```
 
+- **k8s Architecture + Dynamic Volume Provisioning Process**
+
+![k8s-arch](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s-architecture.png)
+
 - **worker node(k8s-worker01, k8s-worker02, k8s-worker03) setting:**
 
 ![ceph_cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/05.%20Dynamic%20Volume%20Provisioning/05-04.%20rook_ceph/rook_ceph_cpu_memoy.PNG)
