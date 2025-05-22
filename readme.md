@@ -58,7 +58,7 @@ sysctl --system
 }
 ```
 
-### 3. Container runtime. (Select only one and install it.)
+### 3. Container runtime (Select only one and install it.)
 
 * [**Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
@@ -88,3 +88,7 @@ sysctl --system
 * [**Ceph-csi (RBD)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-03.%20Ceph-csi(rbd))
 
 * [**Rook ceph**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-04.%20rook_ceph)
+
+### 7. Ingress Controller
+
+* [**Ingress-Nginx Controller**]()
