@@ -1,7 +1,5 @@
 # k8s Cluster Setup
 
-Kubernetes Cluster Setup Guide.
-
 ![node_info.drawio](https://github.com/revenge1005/k8s-cluster-setup/blob/main/node_info.drawio.png)
 
 ## Installation and Running
