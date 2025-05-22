@@ -72,7 +72,7 @@ metadata:
 spec:
   addresses:
   - 192.168.219.190-192.168.219.199
-  autoAssign: true		# autoAssign 옵션을 true 해두면 로드밸런서 타입으로 서비스를 생성하면 자동으로 위의 IP 대역에서 IP를 할당한다.
+  autoAssign: true # autoAssign 옵션을 true 해두면 로드밸런서 타입으로 서비스를 생성하면 자동으로 위의 IP 대역에서 IP를 할당한다.
 
 ---
 
