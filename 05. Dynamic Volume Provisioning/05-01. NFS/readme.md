@@ -10,7 +10,7 @@ or
 
 # 1. Kubernetes : Dynamic Volume Provisioning (NFS)
 
-- k8s cluster + NFS Server
+- **k8s cluster + NFS Server**
 
 ```
 +----------------------+   +----------------------+
