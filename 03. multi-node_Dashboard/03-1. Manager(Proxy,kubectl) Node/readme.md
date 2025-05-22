@@ -100,7 +100,7 @@ k8s-master   NotReady   control-plane   60s   v1.32.4   192.168.219.100   <none>
 }
 ```
 
-### G) Install "etcd" : install ectcd on the control-plane - k8s-master
+### G) Install "etcd" - install ectcd on the control-plane : k8s-master
 
 ```bash
 export RELEASE=$(curl -s https://api.github.com/repos/etcd-io/etcd/releases/latest|grep tag_name | cut -d '"' -f 4)
