@@ -151,6 +151,6 @@ service/almighty          LoadBalancer   10.106.91.31   192.168.219.190   8080:3
 service/kubernetes        ClusterIP      10.96.0.1      <none>            443/TCP                         109m    <none>
 ```
 
-![metallb-01](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20MetalLB/metallb-01.PNG)
+![metallb-01](https://github.com/revenge1005/k8s-cluster-setup/blob/main/04.%20MetalLB/metallb-01.PNG)
 
-![metallb-02](https://github.com/revenge1005/k8s-cluster-setup/blob/main/03.%20MetalLB/metallb-02.PNG)
+![metallb-02](https://github.com/revenge1005/k8s-cluster-setup/blob/main/04.%20MetalLB/metallb-02.PNG)
