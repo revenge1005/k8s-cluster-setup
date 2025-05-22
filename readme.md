@@ -13,8 +13,6 @@
 
 ![cpu_memory](https://github.com/revenge1005/k8s-cluster-setup/blob/main/k8s_cpu_memory.PNG)
 
-<BR>
-
 ### 2. 사전 준비
 
 #### A) System Configuration for All Nodes 
@@ -60,16 +58,12 @@ sysctl --system
 }
 ```
 
-<BR>
-
 ### 3. Container runtime. (Select only one and install it.)
 
 * [**Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
 * [**Installing Kubernetes with 【 Docker Engine (using cri-dockerd) Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-01.%20Docker%20Engine)
   * *Note*: Requires `cri-dockerd` for CRI compatibility in Kubernetes 1.32.
-
-<BR>
 
 ### 4. (Optional) K8s Multi Node / Dashboard
 
@@ -81,13 +75,9 @@ sysctl --system
 
 * [**D) Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-4.%20Enable%20Dashboard)
 
-<BR>
-
 ### 5. (Optional) Set up a LoadBalancer for bare-metal clusters using MetalLB.
 
 * [**Installing MetalLB**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20MetalLB)
-
-<BR>
 
 ### 6. (Optional) Dynamic Volume Provisioning (Select only one and install it.)
 
