@@ -58,9 +58,7 @@ sysctl --system
 }
 ```
 
-### 3. Choosing a container runtime. 
-
-Select only one and install it.
+### 3. Container runtime. (Select only one and install it.)
 
 * [**Installing Kubernetes with 【 containerd Runtime 】**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/02.%20Container%20runtime/02-02.%20containerd)
 
@@ -84,9 +82,7 @@ Set up a LoadBalancer for bare-metal clusters using MetalLB.
 * [**Installing MetalLB**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20MetalLB)
 
 
-### 6. (Optional) Dynamic Volume Provisioning
-
-Select only one and install it.
+### 6. (Optional) Dynamic Volume Provisioning (Select only one and install it.)
 
 * [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-01.%20NFS)
 
