@@ -282,4 +282,4 @@ Events:           <none>
 192.168.219.190  abc.sample.com xyz.sample.com
 ```
 
-![1.gif]()
+![1.gif](https://github.com/revenge1005/k8s-cluster-setup/blob/main/06.%20Ingress-Nginx%20Controller/1.gif)
