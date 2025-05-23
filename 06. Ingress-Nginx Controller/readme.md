@@ -14,21 +14,6 @@
 - https://github.com/kubernetes/ingress-nginx
 
 ```bash
-# Select only one and install it.
-
-# 1. Helm
-{
-    # Install Helm
-    curl -O https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-    bash ./get-helm-3
-    helm upgrade --install ingress-nginx ingress-nginx \
-        --repo https://kubernetes.github.io/ingress-nginx \
-        --namespace ingress-nginx --create-namespace
-}
-
-# or
-
-# 2. If you don't have Helm
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.2/deploy/static/provider/cloud/deploy.yaml
 ```
 
@@ -222,7 +207,6 @@ kubectl apply -f ingress.yaml
 $ kubectl get all,ingress
 NAME                                         READY   STATUS    RESTARTS   AGE
 pod/helloworld-deployment-847c499fb8-v56mk   1/1     Running   0          2m26s
-pod/ingress-nginx-demo-d9b5f5b46-vxqrx       1/1     Running   0          4m12s
 pod/java-deployment-88d98b466-bsvwf          1/1     Running   0          2m20s
 pod/nginx-deployment-86c57bc6b8-9whjl        1/1     Running   0          2m23s
 pod/nginx-deployment-86c57bc6b8-dbxpl        1/1     Running   0          2m23s
