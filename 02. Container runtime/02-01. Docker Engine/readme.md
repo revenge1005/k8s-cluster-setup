@@ -116,7 +116,7 @@ watch -n 3 kubectl get nodes
 # Add to the execution result of the saved kubeadminit command (kubeadm join command) as follows.
 kubeadm join 192.168.219.100:6443 --token 2whv...bbib \
   --discovery-token-ca-cert-hash sha256:712538d8a5a...6a5078570b57 \
-  --cri-socket=unix:///run/containerd/containerd.sock # <-add
+  --cri-socket=unix:///var/run/cri-dockerd.sock # <-add
 ```
 
 <BR>
