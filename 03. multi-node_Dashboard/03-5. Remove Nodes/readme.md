@@ -1,4 +1,4 @@
-1. Remove Nodes
+# 1. Remove Nodes
 
 ![multi-node](https://github.com/revenge1005/k8s-cluster-setup/blob/main/multi-node-configuration.png)
 

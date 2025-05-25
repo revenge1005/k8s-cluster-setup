@@ -75,6 +75,8 @@ sysctl --system
 
 * [**D) Enable Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-4.%20Enable%20Dashboard)
 
+* [**E) Remove Nodes**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/03.%20multi-node_Dashboard/03-5.%20Remove%20Nodes)
+
 ### 5. (Optional) Set up a LoadBalancer for bare-metal clusters using MetalLB.
 
 * [**Installing MetalLB**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20MetalLB)
