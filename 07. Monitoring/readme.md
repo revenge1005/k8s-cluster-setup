@@ -6,7 +6,7 @@
 
 <BR>
 
-# 1. Monitoring(Prometheus,Grafana)
+# 1. Monitoring(Prometheus,Grafana,Loki)
 
 - **k8s cluster + NFS Server**
 
