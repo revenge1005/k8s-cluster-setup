@@ -166,6 +166,12 @@ PskbWLsRrl
 
 ![Grafana-4](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-4.PNG)
 
+- Prometheus Server URL
+
+```bash
+http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local
+```
+
 ![Grafana-5](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-5.PNG)
 
 ![Grafana-6](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-6.PNG)
