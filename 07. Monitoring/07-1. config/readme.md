@@ -6,7 +6,7 @@
 
 <BR>
 
-# 1. Monitoring(Prometheus,Grafana,Loki)
+# 1. Deploy Prometheus, Grafana, Loki
 
 - **k8s cluster + NFS Server**
 
