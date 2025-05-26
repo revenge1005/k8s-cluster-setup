@@ -79,22 +79,24 @@ sysctl --system
 
 ### 5. (Optional) Set up a LoadBalancer for bare-metal clusters using MetalLB.
 
-* [**Installing MetalLB**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20MetalLB)
+* [**A) Installing MetalLB**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/04.%20MetalLB)
 
 ### 6. (Optional) Dynamic Volume Provisioning (Select only one and install it.)
 
-* [**NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-01.%20NFS)
+* [**A) NFS**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-01.%20NFS)
 
-* [**Ceph-csi (Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-02.%20Ceph-csi(cephfs))
+* [**B) Ceph-csi (Cephfs)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-02.%20Ceph-csi(cephfs))
 
-* [**Ceph-csi (RBD)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-03.%20Ceph-csi(rbd))
+* [**C) Ceph-csi (RBD)**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-03.%20Ceph-csi(rbd))
 
-* [**Rook ceph**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-04.%20rook_ceph)
+* [**D) Rook ceph**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/05.%20Dynamic%20Volume%20Provisioning/05-04.%20rook_ceph)
 
 ### 7. Ingress Controller
 
-* [**Ingress-Nginx Controller**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/06.%20Ingress-Nginx%20Controller)
+* [**A) Ingress-Nginx Controller**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/06.%20Ingress-Nginx%20Controller)
 
 ### 8. Monitoring
 
-* [**Deploy Prometheus, Grafana, Loki**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/07.%20Monitoring)
+* [**A) Deploy Prometheus, Grafana, Loki**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/07.%20Monitoring/)
+
+* [**B) Example Prometheus Dashboard**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/07.%20Monitoring)

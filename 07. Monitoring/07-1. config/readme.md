@@ -235,8 +235,9 @@ kubectl port-forward -n monitoring service/loki --address 0.0.0.0 3100:3100 &
 
 ![loki-1](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-1.PNG)
 
+- **Loki Server URL**
+
 ```bash
-# Loki Server URL
 http://loki.monitoring.svc.cluster.local:3100
 ```
 
