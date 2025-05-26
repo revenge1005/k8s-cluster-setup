@@ -181,3 +181,72 @@ http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local
 ![Grafana-8](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/grafana-8.PNG)
 
 ![Grafana-9](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/grafana-9.PNG)
+
+
+### E) Install Loki.
+
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+```
+
+```bash
+cat <<EOF> values.yaml
+loki:
+  image:
+    tag: 2.9.7
+  persistence:
+    enabled: true
+    storageClassName: "nfs-client"
+    size: 50Gi
+EOF
+```
+
+```bash
+helm install loki grafana/loki-stack --namespace monitoring -f values.yaml
+```
+
+```bash
+$ kubectl get pod -n monitoring
+NAME                                                            READY   STATUS    RESTARTS   AGE
+alertmanager-prometheus-kube-prometheus-alertmanager-0          2/2     Running   0          42m
+grafana-6655c7ff45-cpl7v                                        1/1     Running   0          39m
+loki-0                                                          1/1     Running   0          3m1s # <-
+loki-promtail-89mj7                                             1/1     Running   0          3m1s # <-
+loki-promtail-dxlrc                                             1/1     Running   0          3m1s # <-
+loki-promtail-n6gzr                                             1/1     Running   0          3m1s # <-
+prometheus-kube-prometheus-blackbox-exporter-559b9479ff-vpvmh   1/1     Running   0          42m
+prometheus-kube-prometheus-operator-5f9dccf6bc-jlnjf            1/1     Running   0          42m
+prometheus-kube-state-metrics-74cf974698-zlkrc                  1/1     Running   0          42m
+prometheus-node-exporter-56rmf                                  1/1     Running   0          42m
+prometheus-node-exporter-kdpcr                                  1/1     Running   0          42m
+prometheus-prometheus-kube-prometheus-prometheus-0              2/2     Running   0          42m
+```
+
+```bash
+kubectl port-forward -n monitoring service/loki --address 0.0.0.0 3100:3100 &
+```
+
+- `Home > Connections > Data sources > Add data source`
+
+![loki-1]()
+
+```bash
+# Loki Server URL
+http://loki.monitoring.svc.cluster.local:3100
+```
+
+![loki-2]()
+
+![loki-3]()
+
+![loki-4]()
+
+![loki-5]()
+
+![loki-6]()
+
+![loki-7]()
+
+![loki-8]()
+
+![loki-9]()
