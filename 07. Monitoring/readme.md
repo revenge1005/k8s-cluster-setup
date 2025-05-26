@@ -140,9 +140,9 @@ or
 
 - If you have configured multi nodes, https://(Manager(porxy,admin) Node IP address):9090/
 
-![prometheus-1]()
+![prometheus-1](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/prometheus-1.PNG)
 
-![prometheus-2]()
+![prometheus-2](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/prometheus-2.PNG)
 
 ### D) Grafana - Access to the URL below on a client computer in your local network.
 
@@ -158,20 +158,20 @@ $ kubectl get secret grafana-admin --namespace monitoring -o jsonpath="{.data.GF
 PskbWLsRrl
 ```
 
-![Grafana-1]()
+![Grafana-1](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-1.PNG)
 
-![Grafana-2]()
+![Grafana-2](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-2.PNG)
 
-![Grafana-3]()
+![Grafana-3](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-3.PNG)
 
-![Grafana-4]()
+![Grafana-4](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-4.PNG)
 
-![Grafana-5]()
+![Grafana-5](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-5.PNG)
 
-![Grafana-6]()
+![Grafana-6](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-6.PNG)
 
-![Grafana-7]()
+![Grafana-7](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-7.PNG)
 
-![Grafana-8]()
+![Grafana-8](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-8.PNG)
 
-![Grafana-9]()
+![Grafana-9](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/grafana-9.PNG)
