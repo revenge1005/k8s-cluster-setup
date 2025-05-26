@@ -32,7 +32,7 @@ k8s-worker03   Ready,SchedulingDisabled   <none>          4m48s   v1.32.5
 
 ```bash
 # run delete method
-kubectl delete node k8s-worker02
+kubectl delete node k8s-worker03
 ```
 
 ```bash
