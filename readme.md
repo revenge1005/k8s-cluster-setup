@@ -97,4 +97,4 @@ sysctl --system
 
 ### 8. Monitoring
 
-* [**Prometheus,Grafana,Loki**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/07.%20Monitoring)
+* [**Deploy Prometheus, Grafana, Loki**](https://github.com/revenge1005/k8s-cluster-setup/tree/main/07.%20Monitoring)
