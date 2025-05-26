@@ -166,7 +166,7 @@ PskbWLsRrl
 
 ![Grafana-4](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/grafana-4.PNG)
 
-- Prometheus Server URL
+- **Prometheus Server URL**
 
 ```bash
 http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local
@@ -186,10 +186,12 @@ http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local
 ### E) Install Loki.
 
 ```bash
+# Add the Grafana Helm chart repository to the local Helm configuration
 helm repo add grafana https://grafana.github.io/helm-charts
 ```
 
 ```bash
+# Create a values.yaml file with custom configurations for the Loki Helm chart.
 cat <<EOF> values.yaml
 loki:
   image:
@@ -202,10 +204,13 @@ EOF
 ```
 
 ```bash
+# Install the Loki stack using the Helm chart from the Grafana repository
 helm install loki grafana/loki-stack --namespace monitoring -f values.yaml
 ```
 
 ```bash
+# List all pods in the 'monitoring' namespace to verify the deployment
+# The output shows the status of pods, including Loki and Promtail instances
 $ kubectl get pod -n monitoring
 NAME                                                            READY   STATUS    RESTARTS   AGE
 alertmanager-prometheus-kube-prometheus-alertmanager-0          2/2     Running   0          42m
@@ -226,7 +231,7 @@ prometheus-prometheus-kube-prometheus-prometheus-0              2/2     Running 
 kubectl port-forward -n monitoring service/loki --address 0.0.0.0 3100:3100 &
 ```
 
-- `Home > Connections > Data sources > Add data source`
+- **`Home > Connections > Data sources > Add data source`**
 
 ![loki-1](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-1.PNG)
 
