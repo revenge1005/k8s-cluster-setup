@@ -228,25 +228,25 @@ kubectl port-forward -n monitoring service/loki --address 0.0.0.0 3100:3100 &
 
 - `Home > Connections > Data sources > Add data source`
 
-![loki-1]()
+![loki-1](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-1.PNG)
 
 ```bash
 # Loki Server URL
 http://loki.monitoring.svc.cluster.local:3100
 ```
 
-![loki-2]()
+![loki-2](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-2.PNG)
 
-![loki-3]()
+![loki-3](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-3.PNG)
 
-![loki-4]()
+![loki-4](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-4.PNG)
 
-![loki-5]()
+![loki-5](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-5.PNG)
 
-![loki-6]()
+![loki-6](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-6.PNG)
 
-![loki-7]()
+![loki-7](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-7.PNG)
 
-![loki-8]()
+![loki-8](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-8.PNG)
 
-![loki-9]()
+![loki-9](https://github.com/revenge1005/k8s-cluster-setup/blob/main/07.%20Monitoring/img/loki-9.PNG)
